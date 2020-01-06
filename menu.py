@@ -22,6 +22,7 @@ class Music:
 
     def play(self):
         pygame.mixer.music.play(-1)
+        pass
 
     def not_play(self):
         pygame.mixer.music.pause()
@@ -116,12 +117,44 @@ class MainMenu:
         return called_menu
 
 
+control = {'ПРЫЖОК': 'W',
+           'ПРИСЕСТЬ': 'S',
+           'ВЛЕВО': 'A',
+           'ВПРАВО': 'D',
+           'УДАР': 'Y',
+           'СИЛЬНЫЙ УДАР': 'U',
+           'УДАР НОГОЙ': 'I',
+           'СИЛЬНЫЙ УДАР НОГОЙ': 'O',
+           'БЛОК': 'SPACE',
+           'X-RAY': 'P'}
+
+
 class Settings:
     def __init__(self, music_class, sound_class):
         self.points = [(30, 100, 'Музыка: вкл/выкл', (250, 250, 30), (250, 30, 250), 0),
                        (30, 200, 'Звуки: вкл/выкл', (250, 250, 30), (250, 30, 250), 1),
-                       (30, 300, 'Управление', (250, 250, 30), (250, 30, 250), 2),
-                       (30, 400, 'Назад', (250, 250, 30), (250, 30, 250), 3)]
+                       (30, 300, 'Назад', (250, 250, 30), (250, 30, 250), 2),
+                       (450, 35, 'Управление', (250, 250, 30), (250, 30, 250), 3),
+                       (350, 100, 'ПРЫЖОК', (250, 250, 30), (250, 30, 250), 3),
+                       (350, 140, 'ПРИСЕСТЬ', (250, 250, 30), (250, 30, 250), 4),
+                       (350, 180, 'ВЛЕВО', (250, 250, 30), (250, 30, 250), 5),
+                       (350, 220, 'ВПРАВО', (250, 250, 30), (250, 30, 250), 6),
+                       (350, 260, 'УДАР', (250, 250, 30), (250, 30, 250), 7),
+                       (350, 300, 'СИЛ. УДАР', (250, 250, 30), (250, 30, 250), 8),
+                       (350, 340, 'УДАР НОГОЙ', (250, 250, 30), (250, 30, 250), 9),
+                       (350, 380, 'СИЛ. УДАР НОГОЙ', (250, 250, 30), (250, 30, 250), 10),
+                       (350, 420, 'БЛОК', (250, 250, 30), (250, 30, 250), 11),
+                       (350, 460, 'X-RAY', (250, 250, 30), (250, 30, 250), 12),
+                       (700, 100, control['ПРЫЖОК'], (250, 250, 30), (250, 30, 250), 3),
+                       (700, 140, control['ПРИСЕСТЬ'], (250, 250, 30), (250, 30, 250), 4),
+                       (700, 180, control['ВЛЕВО'], (250, 250, 30), (250, 30, 250), 5),
+                       (700, 220, control['ВПРАВО'], (250, 250, 30), (250, 30, 250), 6),
+                       (700, 260, control['УДАР'], (250, 250, 30), (250, 30, 250), 7),
+                       (700, 300, control['СИЛЬНЫЙ УДАР'], (250, 250, 30), (250, 30, 250), 8),
+                       (700, 340, control['УДАР НОГОЙ'], (250, 250, 30), (250, 30, 250), 9),
+                       (700, 380, control['СИЛЬНЫЙ УДАР НОГОЙ'], (250, 250, 30), (250, 30, 250), 10),
+                       (700, 420, control['БЛОК'], (250, 250, 30), (250, 30, 250), 11),
+                       (700, 460, control['X-RAY'], (250, 250, 30), (250, 30, 250), 12)]
         self.music_class = music_class
         self.sound_class = sound_class
 
@@ -139,17 +172,63 @@ class Settings:
             else:
                 self.sound_class.on = True
         elif paragraph == 2:
-            # В будующем надо будет сделать управление
-            return 'control'
-        elif paragraph == 3:
             return 'main'
+        # УПРАВЛЕНИЕ
+        elif paragraph == 3:
+            self.change('up_set')
+        elif paragraph == 4:
+            self.change('down_set')
+        elif paragraph == 5:
+            self.change('left_set')
+        elif paragraph == 6:
+            self.change('right_set')
+        elif paragraph == 7:
+            self.change('hit_set')
+        elif paragraph == 8:
+            self.change('power_hit_set')
+        elif paragraph == 9:
+            self.change('foot_set')
+        elif paragraph == 10:
+            self.change('power_foot_set')
+        elif paragraph == 11:
+            self.change('jump_set')
+        elif paragraph == 12:
+            self.change('xray_set')
+
+    def change(self, set):
+        if set == 'up_set':
+            print(1)
+        elif set == 'down_set':
+            print('1')
+        elif set == 'left_set':
+            print('1')
+        elif set == 'right_set':
+            print('1')
+        elif set == 'hit_set':
+            print('1')
+        elif set == 'power_hit_set':
+            print('1')
+        elif set == 'foot_set':
+            print('1')
+        elif set == 'rower_foot_set':
+            print('1')
+        elif set == 'jump_set':
+            print('1')
+        elif set == 'xray_set':
+            print('1')
 
     def drawing(self, surface, font_menu, number_point):
         for i in self.points:
-            if number_point == i[5]:
-                surface.blit(font_menu.render(i[2], 2, i[4]), (i[0], i[1]))
+            if i != self.points[3]:
+                if number_point == i[5]:
+                    surface.blit(font_menu.render(i[2], 2, i[4]), (i[0], i[1]))
+                else:
+                    surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
             else:
-                surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+                if number_point == i[5]:
+                    surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+                else:
+                    surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
 
     def run(self):
         font = pygame.font.SysFont('serif', 30)
@@ -167,9 +246,9 @@ class Settings:
                     sys.exit()
                 elif i.type == pygame.KEYDOWN:
                     if i.key == pygame.K_UP:
-                        paragraph = (paragraph - 1) % 4
+                        paragraph = (paragraph - 1) % 13
                     if i.key == pygame.K_DOWN:
-                        paragraph = (paragraph + 1) % 4
+                        paragraph = (paragraph + 1) % 13
                     # вызываем действия от подсвечиваемой кнопки при нажатии на enter
                     if i.key == 13:
                         called_menu = self.clicked(paragraph)
