@@ -41,12 +41,12 @@ class Character(pygame.sprite.Sprite):
             self.vector[1] -= 13
             self.vector[0] *= 1.5
             self.on_ground = 0
-            print(self.vector)
 
     def update_pos(self):
         self.pos_x += self.vector[0]
         self.rect.topleft = [self.pos_x, self.pos_y]
         if pygame.sprite.spritecollideany(self, self.walls):
+            print(1)
             self.pos_x -= self.vector[0]
             self.rect.topleft = [self.pos_x, self.pos_y]
         if self.on_ground:

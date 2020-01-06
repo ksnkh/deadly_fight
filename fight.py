@@ -4,6 +4,7 @@ from background import Background
 from character import Character
 from camera import Camera
 from camera_focus import CameraFocus
+from wall import Wall
 
 
 pygame.init()
@@ -25,13 +26,16 @@ class Fight:
         all_sprites = pygame.sprite.Group()
         character = pygame.sprite.Group()
         ground = pygame.sprite.Group()
-        walls = pygame.sprite.Group()
         bground = pygame.sprite.Group()
         cfg = pygame.sprite.Group()
+        walls = pygame.sprite.Group()
+
         gr = Ground(all_sprites, ground)
         bgr = Background(all_sprites, bground, picture='maps/1.jpg')
-        char = Character(walls, ground, 'left', character)
+        lw = Wall([-450, 0], all_sprites, walls)
+        rw = Wall([1250, 0], all_sprites, walls)
         enemy = Character(walls, ground, 'right', character)
+        char = Character(walls, ground, 'left', character)
         camera = Camera()
         cf = CameraFocus(cfg, all_sprites)
         # game cycle
@@ -66,6 +70,7 @@ class Fight:
             character.draw(screen)
             cfg.draw(screen)
             ground.draw(screen)
+            walls.draw(screen)
             clock.tick(fps)
             pygame.display.flip()
         screen.fill(pygame.Color('black'))
