@@ -46,7 +46,6 @@ class Character(pygame.sprite.Sprite):
         self.pos_x += self.vector[0]
         self.rect.topleft = [self.pos_x, self.pos_y]
         if pygame.sprite.spritecollideany(self, self.walls):
-            print(1)
             self.pos_x -= self.vector[0]
             self.rect.topleft = [self.pos_x, self.pos_y]
         if self.on_ground:

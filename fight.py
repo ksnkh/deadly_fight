@@ -29,15 +29,18 @@ class Fight:
         bground = pygame.sprite.Group()
         cfg = pygame.sprite.Group()
         walls = pygame.sprite.Group()
+        camera_walls = pygame.sprite.Group()
 
         gr = Ground(all_sprites, ground)
         bgr = Background(all_sprites, bground, picture='maps/1.jpg')
-        lw = Wall([-450, 0], all_sprites, walls)
-        rw = Wall([1250, 0], all_sprites, walls)
+        lw = Wall([-400, 0], walls)
+        rw = Wall([800, 0], walls)
+        rcw = Wall([-450, 0], all_sprites, camera_walls)
+        lcw = Wall([850, 0], all_sprites, camera_walls)
         enemy = Character(walls, ground, 'right', character)
         char = Character(walls, ground, 'left', character)
         camera = Camera()
-        cf = CameraFocus(cfg, all_sprites)
+        cf = CameraFocus(camera_walls, cfg, all_sprites)
         # game cycle
         running = True
         while running:
@@ -71,6 +74,7 @@ class Fight:
             cfg.draw(screen)
             ground.draw(screen)
             walls.draw(screen)
+            camera_walls.draw(screen)
             clock.tick(fps)
             pygame.display.flip()
         screen.fill(pygame.Color('black'))
