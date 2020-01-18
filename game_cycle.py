@@ -50,7 +50,10 @@ def game_cycle(screen, char, enemy, camera, cf, gr, all_sprites, ground, cfg, wa
         update_pos_and_anim(enemy, walls, gr, char)
 
         # camera update
-        cf.update(char.collision_rect.rect.x, enemy.collision_rect.rect.x)
+        if char.side == 'left':
+            cf.update(char.rect.x + 200, enemy.rect.x)
+        else:
+            cf.update(char.rect.x, enemy.rect.x + 200)
         camera.update(cf)
         for s in all_sprites:
             camera.apply(s)

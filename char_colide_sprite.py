@@ -5,7 +5,7 @@ import random
 class ColisionRect(pygame.sprite.Sprite):
     def __init__(self, coords, *groups):
         super().__init__(groups)
-        image = pygame.Surface([90, 300])
+        image = pygame.Surface([80, 300])
         image.fill((0, random.randint(0, 255), random.randint(0, 255)))
         image.set_alpha(0)
         self.image = image
