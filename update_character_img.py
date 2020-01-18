@@ -21,6 +21,6 @@ def update_img(char, side):
     char.side = side
     if char.side == 'right':
         char.image = pygame.transform.flip(char.image, True, False)
-        char.collision_rect.offset = 50
+        char.collision_rect.offset = 65
     else:
-        char.collision_rect.offset = 20
+        char.collision_rect.offset = 35

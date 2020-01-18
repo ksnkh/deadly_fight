@@ -20,11 +20,11 @@ class Character(pygame.sprite.Sprite):
 
         if side == 'left':
             self.pos_x = 100
-            self.pos_y = 340
+            self.pos_y = 240
             self.collision_rect.offset = 20
         else:
-            self.pos_x = 600
-            self.pos_y = 340
+            self.pos_x = 500
+            self.pos_y = 240
             self.collision_rect.offset = 50
         self.rect.topleft = [self.pos_x, self.pos_y]
 
@@ -46,7 +46,7 @@ class Character(pygame.sprite.Sprite):
             frame = sheet.subsurface(pygame.Rect(frame_location, [51, height]))
             color_key = frame.get_at((0, 0))
             frame.set_colorkey(color_key)
-            self.frames.append(pygame.transform.scale(frame, (130, 200)))
+            self.frames.append(pygame.transform.scale(frame, (200, 300)))
 
 
     def get_damage(self, damage):
