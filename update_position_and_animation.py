@@ -1,0 +1,19 @@
+from update_fighter_pos_x import update_x
+from update_fighter_pos_y import update_y
+
+
+def update_pos_and_anim(fighter, walls, ground, enemy, f=False):
+    if fighter.vector[0] != 0 and fighter.cur_anim != 'walk' and fighter.on_ground:
+        fighter.set_anim('walk')
+        if fighter.vector[0] < 0 and fighter.side == 'left' or fighter.vector[0] > 0 and fighter.side == 'right':
+            fighter.frames.reverse()
+    if fighter.vector[0] == 0 and fighter.cur_anim != 'stand' and fighter.on_ground:
+        fighter.set_anim('stand')
+    if fighter.vector[0] == 0 and fighter.cur_anim != 'jump' and not fighter.on_ground:
+        fighter.set_anim('jump')
+    if fighter.vector[0] != 0 and fighter.cur_anim != 'move_jump' and not fighter.on_ground:
+        print(fighter.cur_anim)
+        fighter.set_anim('move_jump')
+
+    update_x(fighter, walls, enemy)
+    update_y(fighter, ground, enemy)

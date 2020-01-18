@@ -5,11 +5,10 @@ import os
 def load_image(name, color_key=None):
     fullname = os.path.join(name)
     try:
-        image = pygame.image.load(fullname)
+        image = pygame.image.load(fullname).convert()
     except pygame.error as message:
         print('Не удаётся загрузить:', name)
         raise SystemExit(message)
-    image = image.convert_alpha()
     if color_key is not None:
         if color_key is -1:
             color_key = image.get_at((0, 0))
