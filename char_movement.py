@@ -15,6 +15,6 @@ def jump(fighter):
         if fighter.vector[0]:
             fighter.vector[1] -= 13
         else:
-            fighter.vector[1] -= 11
+            fighter.vector[1] -= 10
         fighter.vector[0] *= 1.5
         fighter.on_ground = 0

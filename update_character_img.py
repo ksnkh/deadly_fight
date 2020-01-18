@@ -3,8 +3,6 @@ import pygame
 
 def update_img(char, side):
     char.frame_time -= 1
-    if char.cur_anim == 'move_jump':
-        print(char.frame_time)
     if char.frame_time == 0:
         if char.curent_animation_settings[3]:
             if char.cur_frame == char.curent_animation_settings[3][1]:
