@@ -4,6 +4,8 @@ from change_fighter_position import change_position
 
 def update_y(fighter, ground, enemy):
     # UPDATE Y
+    if fighter.ducked:
+        fighter.vector[1] = 0
     fighter.pos_y += fighter.vector[1]
     change_position(fighter)
     if pygame.sprite.collide_rect(fighter.collision_rect, enemy.collision_rect):

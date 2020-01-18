@@ -31,7 +31,9 @@ def game_cycle(screen, char, enemy, camera, cf, gr, all_sprites, ground, cfg, wa
 
         # key press processing
         if pygame.key.get_pressed()[pygame.K_DOWN]:
-            pass
+            char.ducked = True
+        else:
+            char.ducked = False
         if pygame.key.get_pressed()[pygame.K_LEFT]:
             move(char, -1)
         if pygame.key.get_pressed()[pygame.K_RIGHT]:

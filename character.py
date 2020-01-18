@@ -3,7 +3,6 @@ from load_image import load_image
 from subzero_animations_settings import subzero_animations
 
 
-
 class Character(pygame.sprite.Sprite):
     def __init__(self, name, side, collision_rect, *groups):
         super().__init__(groups)
@@ -17,6 +16,7 @@ class Character(pygame.sprite.Sprite):
         self.side = side
         self.vector = [0, 0]
         self.collision_rect = collision_rect
+        self.ducked = False
 
         if side == 'left':
             self.pos_x = 100
