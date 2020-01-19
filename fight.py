@@ -13,8 +13,11 @@ screen = pygame.display.set_mode(size)
 
 
 class Fight:
-    def __init__(self):
-        pass
+    def __init__(self, map_name, fighter_side, your_char, enemy_char):
+        self.map_name = map_name
+        self.fighter_side = fighter_side
+        self.your_char = your_char
+        self.enemy_char = enemy_char
 
     def run(self):
         all_sprites = pygame.sprite.Group()
@@ -27,15 +30,19 @@ class Fight:
         char_collider_rect = pygame.sprite.Group()
 
         gr = Ground(all_sprites, ground)
-        bgr = Background(all_sprites, bground, picture='maps/1.jpg')
+        bgr = Background(f"maps/{self.map_name}.jpg", all_sprites, bground)
         lw = Wall([-400, 0], walls)
         rw = Wall([800, 0], walls)
         lcw = Wall([-400, 0], all_sprites, camera_walls)
         rcw = Wall([800, 0], all_sprites, camera_walls)
         lccr = ColisionRect([135, 340], char_collider_rect)
         rccr = ColisionRect([635, 340], char_collider_rect)
-        enemy = Character('Sub-Zero', 'left', rccr, fighters)
-        char = Character('Sub-Zero', 'right', lccr, fighters)
+        if self.fighter_side == 'right':
+            enemy = Character(self.enemy_char, 'left', rccr, fighters)
+            char = Character(self.your_char, 'right', lccr, fighters)
+        else:
+            char = Character(self.your_char, 'left', rccr, fighters)
+            enemy = Character(self.enemy_char, 'right', lccr, fighters)
         camera = Camera()
         cf = CameraFocus(camera_walls, cfg, all_sprites)
 
