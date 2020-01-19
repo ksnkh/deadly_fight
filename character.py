@@ -13,12 +13,14 @@ class Character(pygame.sprite.Sprite):
         self.set_anim('stand')
         self.image = self.frames[self.cur_frame]
         self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
         self.side = side
         self.vector = [0, 0]
         self.collision_rect = collision_rect
         self.ducked = False
         self.turn = False
         self.can_turn = True
+        self.helth = 300
 
         if side == 'left':
             self.pos_x = 100
@@ -38,5 +40,5 @@ class Character(pygame.sprite.Sprite):
         set_char_anim(self, anim)
 
     def get_damage(self, damage):
-        self.health -= damage
+        self.helth -= damage
 

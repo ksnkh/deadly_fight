@@ -14,8 +14,8 @@ fps = 80
 clock = pygame.time.Clock()
 
 
-def game_cycle(screen, char, enemy, camera, cf, gr, all_sprites, ground, cfg, walls, char_collider_rect, fighters,
-               bground, camera_walls):
+def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, ground, cfg, walls, char_collider_rect, fighters,
+               bground, camera_walls, helth_bars):
     running = True
     while running:
         for event in pygame.event.get():
@@ -48,6 +48,11 @@ def game_cycle(screen, char, enemy, camera, cf, gr, all_sprites, ground, cfg, wa
             gravity(c)
         update_pos_and_anim(char, walls, gr, enemy, True)
         update_pos_and_anim(enemy, walls, gr, char)
+        if pygame.sprite.collide_mask(char, enemy):
+            print(1)
+
+        for hb in helth_bars:
+            hb.update_helth_bar()
 
         # camera update
         if char.side == 'left':
@@ -69,5 +74,6 @@ def game_cycle(screen, char, enemy, camera, cf, gr, all_sprites, ground, cfg, wa
         ground.draw(screen)
         walls.draw(screen)
         camera_walls.draw(screen)
+        helth_bars.draw(screen)
         clock.tick(fps)
         pygame.display.flip()
