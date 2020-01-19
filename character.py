@@ -18,6 +18,7 @@ class Character(pygame.sprite.Sprite):
         self.vector = [0, 0]
         self.collision_rect = collision_rect
         self.ducked = False
+        self.block = False
         self.turn = False
         self.can_turn = True
         self.helth = 300
@@ -40,5 +41,7 @@ class Character(pygame.sprite.Sprite):
         set_char_anim(self, anim)
 
     def get_damage(self, damage):
-        self.helth -= damage
-
+        if self.cur_anim == 'block':
+            self.helth -= damage // 10
+        else:
+            self.helth -= damage

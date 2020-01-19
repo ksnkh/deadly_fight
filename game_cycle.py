@@ -30,16 +30,25 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
                     update_img(char, 'right')
 
         # key press processing
-        if pygame.key.get_pressed()[pygame.K_DOWN] and char.on_ground:
+        if pygame.key.get_pressed()[pygame.K_s] and char.on_ground and not char.block:
             char.ducked = True
         else:
             char.ducked = False
-        if pygame.key.get_pressed()[pygame.K_LEFT]:
+
+        if pygame.key.get_pressed()[pygame.K_SPACE] and char.on_ground and not char.ducked:
+            char.block = True
+        else:
+            char.block = False
+
+        if pygame.key.get_pressed()[pygame.K_a]:
             move(char, -1)
-        if pygame.key.get_pressed()[pygame.K_RIGHT]:
+
+        if pygame.key.get_pressed()[pygame.K_d]:
             move(char, 1)
-        if pygame.key.get_pressed()[pygame.K_UP]:
+
+        if pygame.key.get_pressed()[pygame.K_w]:
             jump(char)
+
         if pygame.key.get_pressed()[pygame.K_ESCAPE]:
             running = False
 

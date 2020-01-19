@@ -21,7 +21,7 @@ class HelthBar(pygame.sprite.Sprite):
 
         if self.side == 'right':
             helth_bar.blit(helth, (300 - self.fighter.helth, 0))
-            helth_bar.blit(text, (300 - 10 - text.get_width(), 0))
+            helth_bar.blit(text, (300 - 10 - text.get_width(), 2))
             self.image = helth_bar
             self.rect = self.image.get_rect()
             self.rect.topleft = (490, 30)

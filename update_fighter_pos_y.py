@@ -4,7 +4,7 @@ from change_fighter_position import change_position
 
 def update_y(fighter, ground, enemy):
     # UPDATE Y
-    if fighter.ducked:
+    if fighter.ducked or fighter.block:
         fighter.vector[1] = 0
     fighter.pos_y += fighter.vector[1]
     change_position(fighter)
