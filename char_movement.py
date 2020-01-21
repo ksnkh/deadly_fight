@@ -8,7 +8,7 @@ def gravity(fighter):
 def move(fighter, shift):
     if fighter.ducked or fighter.block or fighter.attack:
         return
-    if fighter.on_ground:
+    if fighter.on_ground and not fighter.getting_damage:
         fighter.vector[0] = 4 * shift
 
 
