@@ -15,4 +15,3 @@ def update_y(fighter, ground, enemy):
         fighter.vector[1] = 0
         fighter.vector[0] = 0
         fighter.on_ground = 1
-

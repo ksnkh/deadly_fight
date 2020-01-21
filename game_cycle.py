@@ -15,6 +15,7 @@ img_change = 2
 pygame.time.set_timer(img_change, 90)
 clean_combo_list = 3
 pygame.time.set_timer(clean_combo_list, 100)
+camera_update = 4
 fps = 80
 clock = pygame.time.Clock()
 
@@ -86,16 +87,15 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
             hb.update_helth_bar()
 
         # camera update
-        if char.cur_anim not in subzero_attack_animations and enemy.cur_anim not in subzero_attack_animations:
-            if char.side == 'left':
-                cf.update(char.rect.x + 200, enemy.rect.x)
-            else:
-                cf.update(char.rect.x, enemy.rect.x + 200)
-        camera.update(cf)
-        for s in all_sprites:
-            camera.apply(s)
-        for c in fighters:
-            camera.apply_to_character(c)
+        for i in range(3):
+            if char.cur_anim not in subzero_attack_animations and enemy.cur_anim not in subzero_attack_animations:
+                if char.side == 'left':
+                    cf.update(char.pos_x + char.rect.width, enemy.pos_x)
+                else:
+                    cf.update(char.pos_x, enemy.pos_x + enemy.rect.width)
+            for s in all_sprites:
+                camera.apply(s)
+            camera.apply(cf)
 
         # drawing
         screen.fill(pygame.Color("black"))

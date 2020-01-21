@@ -6,4 +6,7 @@ def apply_damage(char, effect):
         set_char_anim(char, effect[1])
         char.getting_damage = True
     char.get_damage(effect[2])
-    char.vector = effect[3]
+    char.vector = effect[3].copy()
+    if char.side == 'left':
+        char.vector[0] *= -1
+    print(char.vector)

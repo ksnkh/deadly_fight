@@ -1,5 +1,6 @@
 import pygame
 from update_anim import update_anim
+from change_fighter_position import change_position
 
 
 def update_img(char, side, f=False):
@@ -22,6 +23,7 @@ def update_img(char, side, f=False):
 
         char.frame_time = char.curent_animation_settings[2][char.cur_frame]
     char.image = char.frames[char.cur_frame]
+    char.rect = char.image.get_rect()
     char.mask = pygame.mask.from_surface(char.image)
     char.damage = 0
     if char.curent_animation_settings[5]:
@@ -32,12 +34,7 @@ def update_img(char, side, f=False):
         t = char.pos_x + char.rect.width
         char.rect = char.image.get_rect()
         char.pos_x = t - char.rect.width
-
-    if char.turn:
-        char.image = pygame.transform.flip(char.image, True, False)
-        char.collision_rect.offset = 80
-    else:
-        char.collision_rect.offset = 40
+        change_position(char)
 
     # TURN IMAGE
     char.side = side
@@ -46,3 +43,10 @@ def update_img(char, side, f=False):
             char.turn = True
         else:
             char.turn = False
+
+    if char.turn:
+        char.image = pygame.transform.flip(char.image, True, False)
+        char.collision_rect.offset = 80
+    else:
+        char.collision_rect.offset = 40
+

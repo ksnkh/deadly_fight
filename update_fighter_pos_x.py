@@ -1,6 +1,7 @@
 import pygame
 from change_fighter_position import change_position
 
+
 def update_x(fighter, walls, enemy):
     # UPDATE X
     fighter.pos_x += fighter.vector[0]
@@ -30,4 +31,3 @@ def update_x(fighter, walls, enemy):
         fighter.pos_x += shift
         change_position(fighter)
         fighter.vector[0] = 0
-

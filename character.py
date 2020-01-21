@@ -1,6 +1,7 @@
 import pygame
 from subzero_animations_settings import subzero_move_animations
 from set_char_anim import set_char_anim
+from change_fighter_position import change_position
 
 
 class Character(pygame.sprite.Sprite):
@@ -36,10 +37,11 @@ class Character(pygame.sprite.Sprite):
             self.pos_y = 240
             self.collision_rect.offset = 20
         else:
-            self.pos_x = 500
+            self.pos_x = 800 - self.rect.width - 100
             self.pos_y = 240
             self.collision_rect.offset = 50
-        self.rect.topleft = [self.pos_x, self.pos_y]
+        change_position(self)
+
 
     def set_anim(self, anim):
         set_char_anim(self, anim)

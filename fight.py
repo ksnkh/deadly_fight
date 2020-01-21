@@ -39,18 +39,18 @@ class Fight:
         rw = Wall([800, 0], walls)
         lcw = Wall([-400, 0], all_sprites, camera_walls)
         rcw = Wall([800, 0], all_sprites, camera_walls)
-        cf = CameraFocus(camera_walls, cfg, all_sprites)
+        cf = CameraFocus(camera_walls, cfg)
         lccr = ColisionRect([135, 340], char_collider_rect)
         rccr = ColisionRect([635, 340], char_collider_rect)
         if self.fighter_side == 'right':
-            enemy = Character(self.enemy_char, 'left', rccr, fighters)
-            char = Character(self.your_char, 'right', lccr, fighters)
+            enemy = Character(self.enemy_char, 'left', rccr, fighters, all_sprites)
+            char = Character(self.your_char, 'right', lccr, fighters, all_sprites)
         else:
-            char = Character(self.your_char, 'left', rccr, fighters)
-            enemy = Character(self.enemy_char, 'right', lccr, fighters)
+            char = Character(self.your_char, 'left', rccr, fighters, all_sprites)
+            enemy = Character(self.enemy_char, 'right', lccr, fighters, all_sprites)
         chb = HelthBar(char, helth_bars)
         ehb = HelthBar(enemy, helth_bars)
-        camera = Camera()
+        camera = Camera(cf)
 
         # game cycle
         game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, ground, cfg, walls, char_collider_rect,

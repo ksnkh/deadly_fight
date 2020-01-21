@@ -18,6 +18,7 @@ def set_char_anim(char, anim):
         color_key = frame.get_at((0, 0))
         frame.set_colorkey(color_key)
         char.frames.append(pygame.transform.scale(frame, (int(char.curent_animation_settings[1][i] * (200 / 51)), 300)))
+
     # NECESSARY EDITING
     if anim == 'duck':
         char.frames += char.frames[1::-1]

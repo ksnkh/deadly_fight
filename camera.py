@@ -3,17 +3,21 @@ from change_fighter_position import change_position
 
 class Camera:
     # зададим начальный сдвиг камеры
-    def __init__(self):
-        self.dx = 0
+    def __init__(self, target):
+        self.target = target
 
     # сдвинуть объект obj на смещение камеры
     def apply(self, obj):
-        obj.rect.x += self.dx
+        if type(obj).__name__ != 'Character':
+            if self.target.rect.x > 400:
+                obj.rect.x += -1
+            elif self.target.rect.x < 400:
+                obj.rect.x += 1
+        else:
+            if self.target.rect.x > 400:
+                obj.pos_x += -1
+            elif self.target.rect.x < 400:
+                obj.pos_x += 1
+            change_position(obj)
 
-    def apply_to_character(self, char):
-        char.pos_x += self.dx
-        change_position(char)
 
-    # позиционировать камеру на объекте target
-    def update(self, target):
-        self.dx = -(target.rect.x - 400)
