@@ -5,6 +5,7 @@ from main_menu import MainMenu
 from settings import Settings
 from fight import Fight
 from server import select_fighter
+from connect_to_server import Connect
 from egg import Egg
 
 pygame.init()
@@ -33,6 +34,7 @@ s = Sound()
 m.play()
 mainC = MainMenu()
 settingsC = Settings(m, s)
+server = Connect()
 fightC = Fight()
 fighterC = select_fighter()
 current_menu = mainC
@@ -47,6 +49,7 @@ while True:
         current_menu = fightC
     elif t == 'connect to server':
         current_menu = fighterC
+        current_menu = server
     elif t == 'legendary_egg':
         current_menu = eggC
 
