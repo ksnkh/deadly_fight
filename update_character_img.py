@@ -16,6 +16,7 @@ def update_img(char, side, f=False):
             char.attack = False
             char.getting_damage = False
             char.hit = False
+            char.vector = [0, 0]
             update_anim(char)
 
         else:
