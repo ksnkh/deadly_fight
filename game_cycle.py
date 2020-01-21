@@ -2,6 +2,9 @@ import pygame
 from char_movement import gravity, move, jump
 from update_position_and_animation import update_pos_and_anim
 from update_character_img import update_img
+from update_combo_list import update_combo_list
+from collision import collision
+from subzero_animations_settings import subzero_attack_animations
 
 pygame.init()
 pygame.mixer.init()
@@ -10,6 +13,8 @@ fall = 1
 pygame.time.set_timer(fall, 10)
 img_change = 2
 pygame.time.set_timer(img_change, 90)
+clean_combo_list = 3
+pygame.time.set_timer(clean_combo_list, 100)
 fps = 80
 clock = pygame.time.Clock()
 
@@ -19,15 +24,34 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
     running = True
     while running:
         for event in pygame.event.get():
+            if event.type == fall:
+                for c in fighters:
+                    gravity(c)
+
             if event.type == pygame.QUIT:
                 running = False
+
             if event.type == img_change:
-                if char.rect.x <= enemy.rect.x:
-                    update_img(char, 'left')
+                if char.pos_x <= enemy.pos_x:
+                    update_img(char, 'left', True)
                     update_img(enemy, 'right')
                 else:
                     update_img(enemy, 'left')
-                    update_img(char, 'right')
+                    update_img(char, 'right', True)
+
+            if event.type == clean_combo_list:
+                for c in fighters:
+                    update_combo_list(c)
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_y:
+                    char.attack = 'low_punch'
+                elif event.key == pygame.K_u:
+                    char.attack = 'high_punch'
+                elif event.key == pygame.K_i:
+                    char.attack = 'low_kick'
+                elif event.key == pygame.K_o:
+                    char.attack = 'high_kick'
 
         # key press processing
         if pygame.key.get_pressed()[pygame.K_s] and char.on_ground and not char.block:
@@ -53,21 +77,20 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
             running = False
 
         # char updates
-        for c in fighters:
-            gravity(c)
         update_pos_and_anim(char, walls, gr, enemy, True)
         update_pos_and_anim(enemy, walls, gr, char)
         if pygame.sprite.collide_mask(char, enemy):
-            print(1)
+            collision(char, enemy)
 
         for hb in helth_bars:
             hb.update_helth_bar()
 
         # camera update
-        if char.side == 'left':
-            cf.update(char.rect.x + 200, enemy.rect.x)
-        else:
-            cf.update(char.rect.x, enemy.rect.x + 200)
+        if char.cur_anim not in subzero_attack_animations and enemy.cur_anim not in subzero_attack_animations:
+            if char.side == 'left':
+                cf.update(char.rect.x + 200, enemy.rect.x)
+            else:
+                cf.update(char.rect.x, enemy.rect.x + 200)
         camera.update(cf)
         for s in all_sprites:
             camera.apply(s)

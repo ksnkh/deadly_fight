@@ -3,8 +3,6 @@ from change_fighter_position import change_position
 
 def update_x(fighter, walls, enemy):
     # UPDATE X
-    if fighter.ducked or fighter.block:
-        fighter.vector[0] = 0
     fighter.pos_x += fighter.vector[0]
     change_position(fighter)
 
@@ -33,5 +31,3 @@ def update_x(fighter, walls, enemy):
         change_position(fighter)
         fighter.vector[0] = 0
 
-    if fighter.on_ground and (fighter.cur_anim == 'walk' or fighter.cur_anim == 'stand'):
-        fighter.vector[0] = 0

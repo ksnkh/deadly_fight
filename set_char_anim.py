@@ -13,13 +13,21 @@ def set_char_anim(char, anim):
     sheet = load_image(f"animations/{char.name}/{anim}.png", -1)
     height = sheet.get_rect().size[1]
     for i in range(char.curent_animation_settings[0]):
-        frame_location = (char.curent_animation_settings[1] * i, 0)
-        frame = sheet.subsurface(pygame.Rect(frame_location, [51, height]))
+        frame_location = (sum(char.curent_animation_settings[1][:i]), 0)
+        frame = sheet.subsurface(pygame.Rect(frame_location, [char.curent_animation_settings[1][i], height]))
         color_key = frame.get_at((0, 0))
         frame.set_colorkey(color_key)
-        char.frames.append(pygame.transform.scale(frame, (200, 300)))
+        char.frames.append(pygame.transform.scale(frame, (int(char.curent_animation_settings[1][i] * (200 / 51)), 300)))
     # NECESSARY EDITING
     if anim == 'duck':
         char.frames += char.frames[1::-1]
     if anim == 'move_jump':
         char.frames += char.frames[0:1]
+    if anim == 'walk_b':
+        char.frames = char.frames[::-1]
+
+    if char.cur_anim != 'stand':
+        if char.previos_moves and char.previos_moves[-1][0] == anim:
+            char.previos_moves[-1][1] = 0
+        else:
+            char.previos_moves.append([char.cur_anim, 0])
