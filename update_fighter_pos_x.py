@@ -4,7 +4,6 @@ from change_fighter_position import change_position
 
 def update_x(fighter, walls, enemy):
     # UPDATE X
-    print(fighter.vector[0])
     fighter.pos_x += fighter.vector[0]
     change_position(fighter)
 

@@ -45,14 +45,15 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
                     update_combo_list(c)
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_y:
-                    char.attack = 'low_punch'
-                elif event.key == pygame.K_u:
-                    char.attack = 'high_punch'
-                elif event.key == pygame.K_i:
-                    char.attack = 'low_kick'
-                elif event.key == pygame.K_o:
-                    char.attack = 'high_kick'
+                if char.on_ground:
+                    if event.key == pygame.K_y:
+                        char.attack = 'low_punch'
+                    elif event.key == pygame.K_u:
+                        char.attack = 'high_punch'
+                    elif event.key == pygame.K_i:
+                        char.attack = 'low_kick'
+                    elif event.key == pygame.K_o:
+                        char.attack = 'high_kick'
 
         # key press processing
         if pygame.key.get_pressed()[pygame.K_s] and char.on_ground and not char.block:
@@ -87,7 +88,7 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
             hb.update_helth_bar()
 
         # camera update
-        for i in range(3):
+        for i in range(2):
             if char.cur_anim not in subzero_attack_animations and enemy.cur_anim not in subzero_attack_animations:
                 if char.side == 'left':
                     cf.update(char.pos_x + char.rect.width, enemy.pos_x)

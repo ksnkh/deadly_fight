@@ -9,4 +9,3 @@ def apply_damage(char, effect):
     char.vector = effect[3].copy()
     if char.side == 'left':
         char.vector[0] *= -1
-    print(char.vector)
