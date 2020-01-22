@@ -6,6 +6,15 @@ def update_anim(fighter):
         if fighter.attack == 'high_punch' and fighter.cur_anim != 'high_punch' and fighter.on_ground:
             fighter.set_anim('high_punch')
 
+        if fighter.attack == 'low_punch' and fighter.cur_anim != 'low_punch' and fighter.on_ground:
+            fighter.set_anim('low_punch')
+
+        if fighter.attack == 'high_kick' and fighter.cur_anim != 'high_kick' and fighter.on_ground:
+            fighter.set_anim('high_kick')
+
+        if fighter.attack == 'low_kick' and fighter.cur_anim != 'low_kick' and fighter.on_ground:
+            fighter.set_anim('low_kick')
+
     else:
         if fighter.on_ground and fighter.ducked and fighter.cur_anim != 'duck':
             fighter.set_anim('duck')

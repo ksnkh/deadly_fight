@@ -35,9 +35,7 @@ def update_img(char, side, f=False):
         char.rect = char.image.get_rect()
         char.pos_x = t - char.rect.width
         change_position(char)
-        if char.cur_anim == 'high_punch':
-            print(char.pos_x)
-            print('------------------')
+
     else:
         char.rect = char.image.get_rect()
 
