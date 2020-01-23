@@ -7,7 +7,6 @@ from fight import Fight
 from server import select_fighter
 from egg import Egg
 from connect_to_server import Connect
-from attack_execution import attack_execution
 
 pygame.init()
 pygame.mixer.init()
