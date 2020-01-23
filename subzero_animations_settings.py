@@ -11,11 +11,13 @@ subzero_move_animations = {'stand': [12, [51] * 12, [1] * 12, [0, 11], True, Fal
                            'move_jump': [8, [49] * 8, [1] * 8, [1, 7], False, False],
                            'duck': [3, [52] * 3, [1] * 5, [2, 2], False, False],
                            'block': [1, [50], [1], [0, 0], False, False],
-                           'high_punch': [3, [60, 60, 71], [1, 1, 5], [], False, [2, 'weak_hit', 30, [4, 0]]],
-                           'low_punch': [2, [60, 70], [1, 5], [], False, [1, 'weak_hit', 30, [4, 0]]],
-                           'high_kick': [6, [55, 56, 45, 65, 88, 64], [1, 1, 1, 1, 3, 1], [], False, [4, 'weak_hit', 50, [6, 0]]],
-                           'low_kick': [6, [55, 56, 45, 63, 92, 64], [1, 1, 1, 1, 3, 1], [], False, [4, 'weak_hit', 50, [6, 0]]],
-                           'weak_hit': [3, [56, 59, 60], [1] * 3, [], False, False],
+                           'high_punch': [3, [60, 60, 71], [1, 1, 5], [], False, [[2], 'weak_hit', 30, [4, 0]]],
+                           'low_punch': [2, [60, 70], [1, 5], [], False, [[1], 'weak_hit', 30, [4, 0]]],
+                           'high_kick': [6, [55, 56, 45, 65, 88, 64], [1, 1, 1, 1, 3, 1], [], False, [[4], 'weak_hit', 50, [6, 0]]],
+                           'low_kick': [6, [55, 56, 45, 63, 92, 64], [1, 1, 1, 1, 3, 1], [], False, [[4], 'weak_hit', 50, [6, 0]]],
+                           'uppercut': [6, [56, 60, 82, 53, 52, 55], [1, 1, 1, 6, 1, 1], [], False, [[2, 3, 4], 'heavy_hit', 70, [10, 20]]],
+                           'weak_hit': [3, [56, 59, 60], [2] * 3, [], False, False],
+                           'heavy_hit': [6, [79, 82, 63, 53, 79, 100], [2, 2, 6, 2, 2, 3], [], False, False],
                            'dead': [7, [49, 54, 50, 49, 56, 52, 52], [2] * 7, [0, 6], False, False]}
 
-subzero_attack_animations = ['low_punch', 'high_punch', 'low_kick', 'high_kick']
+subzero_attack_animations = ['low_punch', 'high_punch', 'low_kick', 'high_kick', 'uppercut']

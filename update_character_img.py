@@ -29,8 +29,6 @@ def update_img(char, side, f=False):
     char.image = char.frames[char.cur_frame]
 
     if char.side == 'right':
-        if char.cur_anim == 'high_punch':
-            print(char.pos_x, char)
         t = char.pos_x + char.rect.width
         char.rect = char.image.get_rect()
         char.pos_x = t - char.rect.width
@@ -42,7 +40,7 @@ def update_img(char, side, f=False):
     char.mask = pygame.mask.from_surface(char.image)
     char.damage = 0
     if char.curent_animation_settings[5]:
-        if char.cur_frame == char.curent_animation_settings[5][0]:
+        if char.cur_frame in char.curent_animation_settings[5][0]:
             char.damage = char.curent_animation_settings[5][2]
 
     turn_frame(char, side)

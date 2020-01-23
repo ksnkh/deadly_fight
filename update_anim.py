@@ -8,7 +8,10 @@ def update_anim(fighter):
 
     elif fighter.attack:
         if fighter.attack == 'high_punch' and fighter.cur_anim != 'high_punch' and fighter.on_ground:
-            fighter.set_anim('high_punch')
+            if fighter.cur_anim == 'duck' and fighter.cur_anim != 'uppercut':
+                fighter.set_anim('uppercut')
+            elif fighter.cur_anim != 'duck' and fighter.cur_anim != 'uppercut':
+                fighter.set_anim('high_punch')
 
         if fighter.attack == 'low_punch' and fighter.cur_anim != 'low_punch' and fighter.on_ground:
             fighter.set_anim('low_punch')
@@ -41,7 +44,7 @@ def update_anim(fighter):
 
         elif fighter.vector[
             0] == 0 and fighter.cur_anim != 'stand' and fighter.cur_anim != 'duck' and fighter.on_ground\
-                and not fighter.block:
+                and not fighter.block and not fighter.attack:
             fighter.set_anim('stand')
 
         elif fighter.vector[

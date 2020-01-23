@@ -26,10 +26,7 @@ def set_char_anim(char, anim):
         char.frames += char.frames[0:1]
     if anim == 'walk_b':
         char.frames = char.frames[::-1]
-    if anim == 'dead':
-        #char.frames += char.frames[::-1]
-        print('-------------------------')
-        print(len(char.frames))
+
 
     if char.cur_anim != 'stand':
         if char.previos_moves and char.previos_moves[-1][0] == anim:
