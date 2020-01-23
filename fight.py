@@ -8,6 +8,7 @@ from wall import Wall
 from char_colide_sprite import ColisionRect
 from game_cycle import game_cycle
 from helth_bar import HelthBar
+from attack_list import AttackExecution
 
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
@@ -31,6 +32,7 @@ class Fight:
         camera_walls = pygame.sprite.Group()
         char_collider_rect = pygame.sprite.Group()
         helth_bars = pygame.sprite.Group()
+        alg = pygame.sprite.Group()
 
         # CREATING SPRITES
         gr = Ground(all_sprites, ground)
@@ -51,9 +53,10 @@ class Fight:
         chb = HelthBar(char, helth_bars)
         ehb = HelthBar(enemy, helth_bars)
         camera = Camera(cf)
+        al = AttackExecution(self.your_char, alg)
 
         # game cycle
-        game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, ground, cfg, walls, char_collider_rect,
+        game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, alg, all_sprites, ground, cfg, walls, char_collider_rect,
                    fighters, bground, camera_walls, helth_bars)
 
         screen.fill(pygame.Color('black'))

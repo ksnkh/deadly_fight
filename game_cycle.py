@@ -20,8 +20,9 @@ fps = 80
 clock = pygame.time.Clock()
 
 
-def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, ground, cfg, walls, char_collider_rect, fighters,
+def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, alg, all_sprites, ground, cfg, walls, char_collider_rect, fighters,
                bground, camera_walls, helth_bars):
+    show_attack_list = False
     running = True
     while running:
         for event in pygame.event.get():
@@ -45,6 +46,12 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
                     update_combo_list(c)
 
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    if show_attack_list:
+                        show_attack_list = False
+                    else:
+                        show_attack_list = True
+
                 if char.on_ground:
                     if event.key == pygame.K_y:
                         char.attack = 'low_punch'
@@ -75,8 +82,6 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
         if pygame.key.get_pressed()[pygame.K_w]:
             jump(char)
 
-        if pygame.key.get_pressed()[pygame.K_ESCAPE]:
-            running = False
 
         # char updates
         print(char.damage)
@@ -109,5 +114,7 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
         walls.draw(screen)
         camera_walls.draw(screen)
         helth_bars.draw(screen)
+        if show_attack_list:
+            alg.draw(screen)
         clock.tick(fps)
         pygame.display.flip()
