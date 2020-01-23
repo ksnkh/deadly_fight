@@ -17,7 +17,12 @@ def set_char_anim(char, anim):
         frame = sheet.subsurface(pygame.Rect(frame_location, [char.curent_animation_settings[1][i], height]))
         color_key = frame.get_at((0, 0))
         frame.set_colorkey(color_key)
-        char.frames.append(pygame.transform.scale(frame, (int(char.curent_animation_settings[1][i] * (200 / 51)), 300)))
+        char.frames.append(pygame.transform.scale(frame, (char.curent_animation_settings[1][i] * 4, height * 3)))
+
+    t = char.pos_y + char.collision_rect.rect.height
+    char.collision_rect.rect.height = char.frames[0].get_size()[1]
+    char.pos_y = t - char.collision_rect.rect.height
+
 
     # NECESSARY EDITING
     if anim == 'duck':

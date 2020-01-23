@@ -10,6 +10,17 @@ class Character(pygame.sprite.Sprite):
         self.name = name
         if self.name == 'Sub-Zero':
             self.animation_settings = subzero_move_animations
+
+        self.collision_rect = collision_rect
+        if side == 'left':
+            self.pos_x = 100
+            self.pos_y = 240
+            self.collision_rect.offset = 20
+        else:
+            self.pos_x = 500
+            self.pos_y = 240
+            self.collision_rect.offset = 50
+
         self.frames = []
         self.previos_moves = []
         self.cur_anim = 'stand'
@@ -19,7 +30,6 @@ class Character(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.side = side
         self.vector = [0, 0]
-        self.collision_rect = collision_rect
         self.ducked = False
         self.block = False
         self.turn = False
@@ -32,15 +42,6 @@ class Character(pygame.sprite.Sprite):
         self.damage = 0
         self.getting_damage = False
         self.dead = False
-
-        if side == 'left':
-            self.pos_x = 100
-            self.pos_y = 240
-            self.collision_rect.offset = 20
-        else:
-            self.pos_x = 800 - self.rect.width - 100
-            self.pos_y = 240
-            self.collision_rect.offset = 50
         change_position(self)
 
 
