@@ -6,7 +6,7 @@ from settings import Settings
 from fight import Fight
 from server import select_fighter
 from egg import Egg
-from attack_execution import attack_execution
+from connect_to_server import Connect
 
 pygame.init()
 pygame.mixer.init()
@@ -34,6 +34,7 @@ m.play()
 mainC = MainMenu()
 settingsC = Settings(m, s)
 fightC = Fight()
+server_connectC = Connect()
 fighterC = select_fighter()
 current_menu = mainC
 eggC = Egg(0)
@@ -49,4 +50,6 @@ while True:
         current_menu = fighterC
     elif t == 'legendary_egg':
         current_menu = eggC
+    elif t == 'server_connect':
+        current_menu = server_connectC
 
