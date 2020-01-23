@@ -2,6 +2,10 @@ def update_anim(fighter):
     if fighter.getting_damage:
         return
 
+    elif fighter.dead:
+        if fighter.cur_anim != 'dead':
+            fighter.set_anim('dead')
+
     elif fighter.attack:
         if fighter.attack == 'high_punch' and fighter.cur_anim != 'high_punch' and fighter.on_ground:
             fighter.set_anim('high_punch')

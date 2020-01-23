@@ -13,6 +13,7 @@ class HelthBar(pygame.sprite.Sprite):
         helth_bar.fill(pygame.Color('#ff0000'))
         if self.is_dead():
             helth = pygame.Surface([0, 20])
+            self.fighter.dead = True
         else:
             helth = pygame.Surface([self.fighter.helth, 20])
         helth.fill(pygame.Color('#00cc00'))

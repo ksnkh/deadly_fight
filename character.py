@@ -31,6 +31,7 @@ class Character(pygame.sprite.Sprite):
         self.helth = 300
         self.damage = 0
         self.getting_damage = False
+        self.dead = False
 
         if side == 'left':
             self.pos_x = 100

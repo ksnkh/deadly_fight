@@ -90,7 +90,7 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, all_sprites, groun
         # camera update
         for i in range(2):
             if char.cur_anim not in subzero_attack_animations and enemy.cur_anim not in subzero_attack_animations:
-                if char.side == 'left':
+                if char.side == 'right':
                     cf.update(char.pos_x + char.rect.width, enemy.pos_x)
                 else:
                     cf.update(char.pos_x, enemy.pos_x + enemy.rect.width)
