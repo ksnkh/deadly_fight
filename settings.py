@@ -14,9 +14,30 @@ control = {'ВВЕРХ': 'W',
            'СИЛЬНЫЙ УДАР': 'U',
            'УДАР НОГОЙ': 'I',
            'СИЛЬНЫЙ УДАР НОГОЙ': 'O',
-           'ПРЫЖОК': 'SPACE',
-           'X-RAY': 'T',
-           'ПАУЗА': 'P'}
+           'ПРЫЖОК': 'SPACE'}
+
+handle = open("control.txt", "r")
+data = handle.read()
+data = data.split('\n')
+for i in range(len(data)):
+    if i == 0:
+        control['ВВЕРХ'] = data[i]
+    elif i == 1:
+        control['ВНИЗ'] = data[i]
+    elif i == 2:
+        control['ВЛЕВО'] = data[i]
+    elif i == 3:
+        control['ВПРАВО'] = data[i]
+    elif i == 4:
+        control['УДАР'] = data[i]
+    elif i == 5:
+        control['СИЛЬНЫЙ УДАР'] = data[i]
+    elif i == 6:
+        control['УДАР НОГОЙ'] = data[i]
+    elif i == 7:
+        control['СИЛЬНЫЙ УДАР НОГОЙ'] = data[i]
+    elif i == 8:
+        control['ПРЫЖОК'] = data[i]
 
 keyboard = {'113': 'Q',
             '119': 'W',
@@ -79,7 +100,6 @@ keyboard = {'113': 'Q',
             '274': 'ARROW_DN',
             '275': 'ARROW_R',
             '276': 'ARROW_L'}
-
 
 class Settings:
     def __init__(self, music_class, sound_class):
@@ -180,8 +200,13 @@ class Settings:
                                 i[2] = keyboard[str(key)]
                             else:
                                 i[2] = str(key)
+                    keyboard_sym = ''
                     for i in range(13, 22):
                         self.gold_egg += self.points[i][2]
+                        keyboard_sym += self.points[i][2] + '\n'
+                    handle = open("control.txt", "w")
+                    handle.write(keyboard_sym)
+                    handle.close()
                     oops = False
 
     def drawing(self, surface, font_menu, number_point):
