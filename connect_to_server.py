@@ -26,7 +26,7 @@ class Connect:
 
     def clicked(self, paragraph_number):
         if paragraph_number == 0:
-            self.change(3)
+            return 'main'
         elif paragraph_number == 1:
             self.change(4)
 
