@@ -15,6 +15,10 @@ class Connect:
                        [400, 500, 'Подключиться к серверу', (228, 2, 11), 1]]
 
     def drawing(self, surface, font_menu):
+        pygame.draw.rect(screen, (255, 255, 255), (170, 495, 100, 40), 5)
+        pygame.draw.rect(screen, (255, 255, 255), (395, 495, 355, 40), 5)
+        pygame.draw.rect(screen, (255, 255, 255), (175, 250, 500, 75), 5)
+
         for i in self.points:
             surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
             surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
