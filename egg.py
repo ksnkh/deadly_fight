@@ -1,4 +1,8 @@
 import pygame
+import pyglet, ctypes
+import sys
+import moviepy
+from moviepy.editor import *
 
 pygame.init()
 pygame.mixer.init()
@@ -69,17 +73,27 @@ class Egg:
 
     def flex(self):
         font = pygame.font.SysFont('mr_AfronikG', 38)
-        for i in range(13, 22):
-            points = list(self.points[i][2])
-            points[0] = '-'
-            self.points[i][2] = ''.join(points)
-            pygame.time.wait(250)
-            self.drawing(screen, font)
-        for i in range(13, 21):
-            sym = ['П', 'А', 'С', 'Х', 'А', 'Л', 'К', 'А']
-            points = list(self.points[i][2])
-            points[0] = sym[i - 13]
-            self.points[i][2] = ''.join(points)
-            pygame.time.wait(250)
-            self.drawing(screen, font)
-        screen.fill(pygame.Color('black'))
+        #for i in range(13, 22):
+        #    points = list(self.points[i][2])
+        #    points[0] = '-'
+        #    self.points[i][2] = ''.join(points)
+        #    pygame.time.wait(250)
+        #    self.drawing(screen, font)
+        #for i in range(13, 21):
+        #    sym = ['П', 'А', 'С', 'Х', 'А', 'Л', 'К', 'А']
+        #   points = list(self.points[i][2])
+        #    points[0] = sym[i - 13]
+        #   self.points[i][2] = ''.join(points)
+        #   pygame.time.wait(250)
+        #    self.drawing(screen, font)
+        clip = VideoFileClip("soon\Flex.mp4")
+        clip.resize(width=100)
+        run = True
+        while run:
+            clip.preview()
+            events = pygame.event.get()
+            for event in events:
+                if event.type == pygame.QUIT:
+                    sys.exit(0)
+            run = False
+            screen.fill(0)
