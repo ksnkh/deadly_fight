@@ -2,6 +2,7 @@ import pygame
 from update_anim import update_anim
 from change_fighter_position import change_position
 from turn_frame import turn_frame
+from set_char_anim import set_char_anim
 
 
 def update_img(char, side, f=False):
@@ -15,12 +16,15 @@ def update_img(char, side, f=False):
         if char.cur_frame == len(char.curent_animation_settings[2]) - 1:
             char.cur_anim = ''
             char.attack = False
-            char.getting_damage = False
             char.hit = False
             char.vector = [0, 0]
             char.can_turn = True
             turn_frame(char, side)
-            update_anim(char)
+            if char.cur_anim == 'trip':
+                set_char_anim(char, 'stand_up')
+            else:
+                char.getting_damage = False
+                update_anim(char)
 
         else:
             char.cur_frame += 1

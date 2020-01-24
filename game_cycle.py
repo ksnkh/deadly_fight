@@ -84,7 +84,6 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, alg, all_sprites, 
 
 
         # char updates
-        print(char.damage)
         update_pos_and_anim(char, walls, gr, enemy, True)
         update_pos_and_anim(enemy, walls, gr, char)
         if pygame.sprite.collide_mask(char, enemy):

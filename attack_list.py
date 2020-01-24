@@ -81,4 +81,5 @@ class AttackExecution(pygame.sprite.Sprite):
         font = pygame.font.SysFont('ToughSansRegular', 28)
         for i in self.points:
             self.image.blit(font.render(i[2], 2, i[3]), (i[0], i[1]))
+        self.image.set_alpha(200)
         self.rect = self.image.get_rect()
