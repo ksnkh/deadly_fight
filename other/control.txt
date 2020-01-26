@@ -1,9 +1,9 @@
-SPACE
+C
+R
+E
 A
-SPACE
-SPACE
-A
-A
-A
-A
-SPACE
+T
+O
+R
+S
+3

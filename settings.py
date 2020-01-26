@@ -16,7 +16,7 @@ control = {'ВВЕРХ': 'W',
            'СИЛЬНЫЙ УДАР НОГОЙ': 'O',
            'ПРЫЖОК': 'SPACE'}
 
-handle = open("control.txt", "r")
+handle = open("other\control.txt", "r")
 data = handle.read()
 data = data.split('\n')
 for i in range(len(data)):
@@ -204,7 +204,7 @@ class Settings:
                     for i in range(13, 22):
                         self.gold_egg += self.points[i][2]
                         keyboard_sym += self.points[i][2] + '\n'
-                    handle = open("control.txt", "w")
+                    handle = open("other\control.txt", "w")
                     handle.write(keyboard_sym)
                     handle.close()
                     oops = False
@@ -254,3 +254,4 @@ class Settings:
             pygame.display.flip()
         screen.fill(pygame.Color('black'))
         return called_menu
+

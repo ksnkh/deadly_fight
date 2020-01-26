@@ -1,11 +1,11 @@
 import pygame
-from music import Music, Sound, Music_Flex
+from music import Music, Sound
 from load_image import load_image
 from main_menu import MainMenu
 from settings import Settings
 from fight import Fight
 from server import select_fighter
-from egg import Egg
+from egg import Egg, Ricardo
 from connect_to_server import Connect
 
 pygame.init()
@@ -29,7 +29,6 @@ setting_music = ['Музыка: вкл',
 gold_egg = '0'
 m = Music()
 s = Sound()
-#n = Music_Flex()
 m.play()
 mainC = MainMenu()
 settingsC = Settings(m, s)
@@ -38,6 +37,7 @@ server_connectC = Connect()
 fighterC = select_fighter()
 current_menu = mainC
 eggC = Egg(0)
+ricardoC = Ricardo()
 while True:
     t = current_menu.run()
     if t == 'settings':
@@ -52,4 +52,6 @@ while True:
         current_menu = eggC
     elif t == 'server_connect':
         current_menu = server_connectC
+    elif t == 'ricardo':
+        current_menu = ricardoC
 

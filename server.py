@@ -91,7 +91,6 @@ class select_fighter():
                 hero_guest = 'саб зиро'
                 self.player_1 = pygame.image.load('heroes\сабзиро_бой_з.jpg')
                 screen.blit(self.player_1, (522, 42))
-            print(hero_guest)
             self.paragraph = 0
             pygame.display.flip()
         elif self.paragraph == 1:
