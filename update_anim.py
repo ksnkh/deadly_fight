@@ -14,17 +14,24 @@ def update_anim(fighter):
                 fighter.set_anim('high_punch')
 
         if fighter.attack == 'low_punch' and fighter.cur_anim != 'low_punch' and fighter.on_ground:
-            fighter.set_anim('low_punch')
+            print(fighter.cur_anim)
+            if fighter.previos_moves:
+                if fighter.previos_moves[-1][0] == 'walk_f' and fighter.cur_anim != 'throw':
+                    fighter.set_anim('throw')
+            elif fighter.cur_anim != 'throw':
+                fighter.set_anim('low_punch')
 
         if fighter.attack == 'high_kick' and fighter.cur_anim != 'high_kick' and fighter.on_ground:
-            if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'roundhouse':
-                fighter.set_anim('roundhouse')
+            if fighter.previos_moves:
+                if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'roundhouse':
+                    fighter.set_anim('roundhouse')
             elif fighter.cur_anim != 'roundhouse':
                 fighter.set_anim('high_kick')
 
         if fighter.attack == 'low_kick' and fighter.cur_anim != 'low_kick' and fighter.on_ground:
-            if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'sweep_kick':
-                fighter.set_anim('sweep_kick')
+            if fighter.previos_moves:
+                if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'sweep_kick':
+                    fighter.set_anim('sweep_kick')
             elif fighter.cur_anim != 'sweep_kick':
                 fighter.set_anim('low_kick')
 

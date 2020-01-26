@@ -20,7 +20,7 @@ def update_img(char, side, f=False):
             char.vector = [0, 0]
             char.can_turn = True
             turn_frame(char, side)
-            if char.cur_anim == 'trip':
+            if char.cur_anim in ['trip', 'thrown']:
                 set_char_anim(char, 'stand_up')
             else:
                 char.getting_damage = False

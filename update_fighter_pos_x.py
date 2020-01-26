@@ -20,7 +20,8 @@ def update_x(fighter, walls, enemy, f=False):
         fighter.vector[0] = 0
 
     # CHAR COLLISION
-    if pygame.sprite.collide_rect(fighter.collision_rect, enemy.collision_rect):
+    if pygame.sprite.collide_rect(fighter.collision_rect, enemy.collision_rect) and\
+            fighter.cur_anim not in ['throw', 'thrown'] and enemy.cur_anim not in ['throw', 'thrown']:
         if fighter.side == 'left':
             shift = -1
         else:

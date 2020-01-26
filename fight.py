@@ -37,9 +37,9 @@ class Fight:
         # CREATING SPRITES
         gr = Ground(all_sprites, ground)
         bgr = Background(f"maps/{self.map_name}.png", all_sprites, bground)
-        lw = Wall([-400, 0], walls)
+        lw = Wall([-500, 0], walls)
         rw = Wall([800, 0], walls)
-        lcw = Wall([-400, 0], all_sprites, camera_walls)
+        lcw = Wall([-500, 0], all_sprites, camera_walls)
         rcw = Wall([800, 0], all_sprites, camera_walls)
         cf = CameraFocus(camera_walls, cfg)
         lccr = ColisionRect([135, 340], char_collider_rect)

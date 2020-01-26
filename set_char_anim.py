@@ -31,6 +31,9 @@ def set_char_anim(char, anim):
         char.frames += char.frames[0:1]
     if anim == 'walk_b':
         char.frames = char.frames[::-1]
+    if anim == 'thrown':
+        for i in range(len(char.frames)):
+            char.frames[i] = pygame.transform.flip(char.frames[i], True, False)
 
 
     if char.cur_anim != 'stand':
