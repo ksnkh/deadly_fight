@@ -28,11 +28,14 @@ def update_anim(fighter):
             elif fighter.cur_anim != 'roundhouse':
                 fighter.set_anim('high_kick')
 
-        if fighter.attack == 'low_kick' and fighter.cur_anim != 'low_kick' and fighter.on_ground:
+        if fighter.attack == 'low_kick' and fighter.cur_anim != 'low_kick':
             if fighter.previos_moves:
                 if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'sweep_kick':
                     fighter.set_anim('sweep_kick')
-            elif fighter.cur_anim != 'sweep_kick':
+            if not fighter.on_ground and fighter.cur_anim != 'air_kick' and fighter.cur_anim != 'sweep_kick':
+                print(1)
+                fighter.set_anim('air_kick')
+            elif fighter.cur_anim != 'sweep_kick' and fighter.on_ground and fighter.cur_anim != 'sweep_kick':
                 fighter.set_anim('low_kick')
 
     else:

@@ -52,15 +52,16 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, alg, all_sprites, 
                     else:
                         show_attack_list = True
 
-                if char.on_ground:
-                    if event.key == pygame.K_y:
-                        char.attack = 'low_punch'
-                    elif event.key == pygame.K_u:
-                        char.attack = 'high_punch'
-                    elif event.key == pygame.K_i:
-                        char.attack = 'low_kick'
-                    elif event.key == pygame.K_o:
-                        char.attack = 'high_kick'
+                if event.key == pygame.K_y:
+                    char.attack = 'low_punch'
+                elif event.key == pygame.K_u:
+                    char.attack = 'high_punch'
+                elif event.key == pygame.K_i:
+                    char.attack = 'low_kick'
+                elif event.key == pygame.K_o:
+                    char.attack = 'high_kick'
+                elif char.cur_anim not in char.attack_animations:
+                    char.attack = False
 
         # key press processing
         if pygame.key.get_pressed()[pygame.K_s] and char.on_ground and not char.block:

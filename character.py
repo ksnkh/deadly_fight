@@ -1,5 +1,5 @@
 import pygame
-from subzero_animations_settings import subzero_move_animations
+from subzero_animations_settings import subzero_move_animations, subzero_attack_animations
 from set_char_anim import set_char_anim
 from change_fighter_position import change_position
 
@@ -10,6 +10,7 @@ class Character(pygame.sprite.Sprite):
         self.name = name
         if self.name == 'Sub-Zero':
             self.animation_settings = subzero_move_animations
+            self.attack_animations = subzero_attack_animations
 
         self.collision_rect = collision_rect
         if side == 'left':
