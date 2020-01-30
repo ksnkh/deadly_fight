@@ -34,6 +34,11 @@ def set_char_anim(char, anim):
     if anim == 'thrown':
         for i in range(len(char.frames)):
             char.frames[i] = pygame.transform.flip(char.frames[i], True, False)
+    if anim == 'slide':
+        if char.side == 'left':
+            char.vector[0] = 10
+        else:
+            char.vector[0] = -10
 
 
     if char.cur_anim != 'stand':

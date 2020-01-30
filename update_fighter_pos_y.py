@@ -15,6 +15,6 @@ def update_y(fighter, ground, enemy):
         fighter.pos_y -= fighter.vector[1]
         change_position(fighter)
         fighter.vector[1] = 0
-        if not fighter.getting_damage:
+        if not fighter.getting_damage and fighter.cur_anim != 'slide':
             fighter.vector[0] = 0
         fighter.on_ground = 1

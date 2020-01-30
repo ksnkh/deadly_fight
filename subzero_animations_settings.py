@@ -21,6 +21,7 @@ subzero_move_animations = {'stand': [12, [51] * 12, [1] * 12, [0, 11], True, Fal
                            'roundhouse': [8, [57, 62, 87, 61, 53, 54, 60, 50], [1] * 8, [], False, [[2, 3], 'heavy_hit', 70, [10, -20]]],
                            'throw': [7, [66, 84, 61, 62, 53, 78, 78], [1] * 7, [], False, [[3], 'thrown', 60, [-10, -20]]],
                            'air_kick': [2, [41, 82], [3, 3], [], False, [[1], 'heavy_hit', 40, [7, 0]]],
+                           'slide': [2, [71, 81], [1, 5], [], False, [[1], 'heavy_hit', 40, [2, -20]]],
                            
                            'weak_hit': [3, [56, 59, 60], [2] * 3, [], False, False],
                            'heavy_hit': [6, [79, 82, 63, 53, 79, 100], [2, 2, 5, 2, 2, 2], [], False, False],
@@ -31,4 +32,4 @@ subzero_move_animations = {'stand': [12, [51] * 12, [1] * 12, [0, 11], True, Fal
                            'dead': [7, [49, 54, 50, 49, 56, 52, 52], [2] * 7, [0, 6], False, False]}
 
 subzero_attack_animations = ['low_punch', 'high_punch', 'low_kick', 'high_kick', 'uppercut', 'sweep_kick', 'roundhouse',
-                             'throw', 'air_kick']
+                             'throw', 'air_kick', 'slide']

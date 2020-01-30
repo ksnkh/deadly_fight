@@ -25,6 +25,8 @@ def update_anim(fighter):
             if fighter.previos_moves:
                 if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'roundhouse':
                     fighter.set_anim('roundhouse')
+                if fighter.previos_moves[-1][0] == 'sweep_kick' and fighter.cur_anim != 'slide' and fighter.name == 'Sub-Zero':
+                    fighter.set_anim('slide')
             elif fighter.cur_anim != 'roundhouse':
                 fighter.set_anim('high_kick')
 
