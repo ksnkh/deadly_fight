@@ -223,7 +223,7 @@ class Settings:
                     surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
 
     def run(self):
-        image_5 = pygame.image.load('backgrounds\чёрныйфон.jpg')
+        image_5 = pygame.image.load('backgrounds\лес.png')
         screen.blit(image_5, (0, 0))
         font = pygame.font.SysFont('mr_AfronikG', 38)
         running = True

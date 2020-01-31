@@ -21,18 +21,19 @@ keyboard = {'49': '1',
 
 class Connect:
     def __init__(self):
-        self.number_server = '12'
+        self.number_server = ''
         self.paragraph = 0
-        self.points = [[200, 35, 'Подключиться к серверу', (240, 240, 240), (240, 240, 240), 0],
-                       [188, 200, 'Введите ip сервера через пробел', (240, 240, 240), (240, 240, 240), 0],
-                       [175, 500, 'Назад', (128, 128, 128), (210, 50, 0), 0],
-                       [400, 500, 'Подключиться к серверу', (128, 128, 128), (210, 50, 0), 1]]
+        self.points = [[220, 35, '', (200, 200, 200), (200, 200, 200), 0],
+                       [163, 185, 'Введите ip сервера через пробел', (200, 200, 240), (200, 200, 200), 0],
+                       [355, 390, 'Назад', (128, 128, 128), (250, 30, 0), 0],
+                       [298, 340, 'Подключиться', (128, 128, 128), (250, 30, 0), 1]]
+        self.colour_rect = [180, 0, 0]
 
     def drawing(self, surface, font_menu, number_point):
         pygame.display.flip()
         font1 = pygame.font.SysFont('ToughSansRegular', 60)
-        pygame.draw.rect(screen, (255, 255, 255), (175, 250, 500, 75), 5)
-        surface.blit(font1.render(self.number_server, 2, (255, 255, 255)), (185, 255))
+        pygame.draw.rect(screen, self.colour_rect, (150, 250, 500, 75), 5)
+        surface.blit(font1.render(self.number_server, 2, (255, 255, 255)), (165, 254))
         for i in self.points:
             if number_point == i[5]:
                 surface.blit(font_menu.render(i[2], 2, i[4]), (i[0], i[1]))
@@ -46,6 +47,10 @@ class Connect:
             return 'connect to server'
 
     def run(self):
+        image_5 = pygame.image.load('backgrounds\скорпион.png')
+        screen.blit(image_5, (-70, 0))
+        #image_6 = pygame.image.load('backgrounds\антенна.png')
+        #screen.blit(image_6, (365, 100))
         running = True
         font = pygame.font.SysFont('ToughSansRegular', 30)
         while running:
@@ -60,21 +65,25 @@ class Connect:
                     sys.exit()
                 elif i.type == pygame.KEYDOWN:
                     # меняем подсвечиваемую кнопку кнопками верх/вниз, если это возможно
-                    if i.key == pygame.K_RIGHT:
+                    if i.key == pygame.K_UP:
                         self.paragraph = (self.paragraph - 1) % 2
-                    if i.key == pygame.K_LEFT:
+                    if i.key == pygame.K_DOWN:
                         self.paragraph = (self.paragraph + 1) % 2
                     # вызываем действия от подсвечиваемой кнопки при нажатии на enter
                     if i.key == 13:
                         called_menu = self.clicked(self.paragraph)
                         running = False
+                    if str(i.key) not in keyboard or len(self.number_server) >= 15:
+                        self.colour_rect = [180, 0, 0]
+                        pygame.draw.rect(screen, (70, 0, 100), (150, 250, 500, 75), 5)
                     if str(i.key) in keyboard and len(self.number_server) < 15:
+                        self.colour_rect = [0, 180, 0]
+                        pygame.draw.rect(screen, (70, 0, 100), (150, 250, 500, 75), 5)
                         self.number_server += keyboard[str(i.key)]
                     if i.key == 8:
                         a = list(self.number_server)
                         b = a[0:-1]
                         self.number_server = ''.join(b)
-                        screen.fill(pygame.Color('black'))
                 # вызываем действия от подсвечиваемой кнопки при нажатии на левую кнопку мыши/enter
                 if i.type == pygame.MOUSEBUTTONDOWN and i.button == 1:
                     called_menu = self.clicked(self.paragraph)

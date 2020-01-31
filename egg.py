@@ -1,7 +1,4 @@
 import pygame
-from moviepy.editor import *
-from music import Music, Sound
-from settings import Settings
 
 pygame.init()
 pygame.mixer.init()
@@ -10,7 +7,7 @@ screen = pygame.display.set_mode(size)
 
 
 class Egg:
-    def __init__(self, music_class):
+    def __init__(self):
         self.points = [[30, 100, 'Музыка: вкл', (128, 128, 128), 0],
                        [30, 180, 'Звуки: вкл', (128, 128, 128), 1],
                        [30, 260, 'Назад', (128, 128, 128), 1],
@@ -33,10 +30,35 @@ class Egg:
                        [620, 340, 'R', (128, 128, 128), 9],
                        [620, 380, 'S', (128, 128, 128), 10],
                        [620, 420, '3', (128, 128, 128), 11]]
-        self.music_class = music_class
 
     def drawing(self, surface, font_menu):
+        pygame.time.wait(500)
+        image_0 = pygame.image.load('backgrounds\лес1.png')
+        screen.blit(image_0, (0, 0))
+        for i in self.points:
+            surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+            surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+        pygame.display.flip()
+        pygame.time.wait(500)
+        image_0 = pygame.image.load('backgrounds\лес2.png')
+        screen.blit(image_0, (0, 0))
+        for i in self.points:
+            surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+            surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+        pygame.display.flip()
+        pygame.time.wait(500)
+        image_0 = pygame.image.load('backgrounds\лес3.png')
+        screen.blit(image_0, (0, 0))
+        for i in self.points:
+            surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+            surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+        pygame.display.flip()
+        pygame.time.wait(500)
         screen.fill(pygame.Color('black'))
+        for i in self.points:
+            surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+            surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
+        pygame.display.flip()
         for i in self.points:
             surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
             surface.blit(font_menu.render(i[2], 2, i[3]), (i[0], i[1]))
@@ -265,9 +287,6 @@ class Egg:
 
         pygame.time.wait(5000)
     def run(self):
-        m = Music()
-        s = Sound()
-        m.not_play()
         self.points = [[30, 100, 'Музыка: вкл', (128, 128, 128), 0],
                        [30, 180, 'Звуки: вкл', (128, 128, 128), 1],
                        [30, 260, 'Назад', (128, 128, 128), 1],
@@ -292,27 +311,31 @@ class Egg:
                        [620, 420, '3', (128, 128, 128), 11]]
         font = pygame.font.SysFont('mr_AfronikG', 38)
         self.drawing(screen, font)
-        return 'ricardo'
-
-
-class Ricardo():
-    def __init__(self):
-        pass
-
-    def run(self):
-        self.clip = VideoFileClip("other\Flex.mp4")
-        self.clip.preview(24)
-        run = True
-        while run:
-            events = pygame.event.get()
-            for event in events:
-                if event == pygame.QUIT:
-                    sys.exit()
-            run = False
-        screen.fill(pygame.Color('black'))
-        pygame.display.flip()
-        m = Music()
-        s = Sound()
-        m.play()
-        settingsC = Settings(m, s)
+        #return 'ricardo'
         return 'settings'
+
+
+#class Ricardo():
+#    def __init__(self):
+#        pass
+
+#    def run(self):
+#        m = Music()
+#        s = Sound()
+#        m.not_play()
+#        self.clip = VideoFileClip("other\Flex.mp4")
+#        self.clip.preview(24)
+#        run = True
+#        while run:
+#            events = pygame.event.get()
+#            for event in events:
+#                if event == pygame.QUIT:
+#                    sys.exit()
+#            run = False
+#        screen.fill(pygame.Color('black'))
+#        pygame.display.flip()
+#        m = Music()
+#        s = Sound()
+#        m.play()
+#        settingsC = Settings(m, s)
+#        return 'settings'
