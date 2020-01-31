@@ -83,7 +83,6 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, alg, all_sprites, 
         if pygame.key.get_pressed()[pygame.K_w]:
             jump(char)
 
-
         # char updates
         update_pos_and_anim(char, walls, gr, enemy, True)
         update_pos_and_anim(enemy, walls, gr, char)

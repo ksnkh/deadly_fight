@@ -22,7 +22,7 @@ class Character(pygame.sprite.Sprite):
             self.pos_y = 240
             self.collision_rect.offset = 50
 
-        self.actual_coords_x = self.pos_x
+        self.actual_coords_x = self.pos_x + 450
         self.actual_coords_y = self.pos_y
         self.frames = []
         self.previos_moves = []
