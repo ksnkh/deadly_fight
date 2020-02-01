@@ -2,18 +2,12 @@ import pygame
 from change_fighter_position import change_position
 
 
-def update_y(fighter, ground, enemy):
+def update_y(fighter, enemy, f=False):
     # UPDATE Y
-    fighter.pos_y += fighter.vector[1]
-    change_position(fighter)
-    if pygame.sprite.collide_rect(fighter.collision_rect, enemy.collision_rect) and\
-            fighter.cur_anim not in ['throw', 'thrown'] and enemy.cur_anim not in ['throw', 'thrown']:
-        fighter.pos_y -= fighter.vector[1]
-        change_position(fighter)
+    change_position(fighter, [0, fighter.vector[1]])
 
-    elif pygame.sprite.collide_rect(fighter.collision_rect, ground):
-        fighter.pos_y -= fighter.vector[1]
-        change_position(fighter)
+    if fighter.pos_y + fighter.rect.height > 540:
+        change_position(fighter, [0,  540 - (fighter.pos_y + fighter.rect.height)], True)
         fighter.vector[1] = 0
         if not fighter.getting_damage and fighter.cur_anim != 'slide':
             fighter.vector[0] = 0

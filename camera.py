@@ -15,9 +15,9 @@ class Camera:
                 obj.rect.x += 1
         else:
             if self.target.rect.x > 400:
-                obj.pos_x += -1
+                shift = -1
             elif self.target.rect.x < 400:
-                obj.pos_x += 1
-            change_position(obj)
-
-
+                shift = 1
+            else:
+                shift = 0
+            change_position(obj, [shift, 0])

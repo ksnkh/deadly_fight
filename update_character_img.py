@@ -34,12 +34,11 @@ def update_img(char, side, f=False):
 
     if char.side == 'right':
         t = char.pos_x + char.rect.width
-        char.rect = char.image.get_rect()
-        char.pos_x = t - char.rect.width
-        change_position(char)
+        char.rect.width = char.image.get_rect()[2]
+        change_position(char, [(t - char.rect.width) - char.pos_x, 0])
 
     else:
-        char.rect = char.image.get_rect()
+        char.rect.width = char.image.get_rect()[2]
 
     char.mask = pygame.mask.from_surface(char.image)
     char.damage = 0
