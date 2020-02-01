@@ -20,8 +20,8 @@ fps = 80
 clock = pygame.time.Clock()
 
 
-def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, alg, all_sprites, ground, cfg, walls, char_collider_rect, fighters,
-               bground, camera_walls, helth_bars):
+def game_cycle(screen, char, enemy, camera, cf, chb, ehb, alg, all_sprites, cfg, fighters,
+               bground, helth_bars):
     show_attack_list = False
     running = True
     while running:
@@ -106,11 +106,7 @@ def game_cycle(screen, char, enemy, camera, cf, gr, chb, ehb, alg, all_sprites, 
         screen.fill(pygame.Color("black"))
         bground.draw(screen)
         fighters.draw(screen)
-        char_collider_rect.draw(screen)
         cfg.draw(screen)
-        ground.draw(screen)
-        walls.draw(screen)
-        camera_walls.draw(screen)
         helth_bars.draw(screen)
         if show_attack_list:
             alg.draw(screen)

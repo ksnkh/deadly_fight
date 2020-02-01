@@ -11,10 +11,15 @@ class CameraFocus(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = (400, 450)
         self.walls = walls
+        self.pos_x = 850
 
     def update(self, p1_x, p2_x):
+        print(self.pos_x)
         t = self.rect.x
         self.rect.x = ((p1_x + p2_x) // 2)
-        if pygame.sprite.spritecollideany(self, self.walls):
+        dif = self.rect.x - t
+        if not 400 <= self.pos_x + dif <= 1300:
             self.rect.x = t
+        else:
+            self.pos_x += dif
 

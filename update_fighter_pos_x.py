@@ -9,10 +9,8 @@ def update_x(fighter, enemy, f=False):
     # CHAR COLLISION
     if fighter.cur_anim not in ['throw', 'thrown'] and enemy.cur_anim not in ['throw', 'thrown'] \
                    and max(fighter.pos_x, enemy.pos_x) < min(fighter.pos_x, enemy.pos_x) + 100:
-        print(1)
         if not (fighter.actual_coords_y < enemy.actual_coords_y and fighter.actual_coords_y + fighter.rect.width < enemy.actual_coords_y \
                 or (enemy.actual_coords_y < fighter.actual_coords_y and enemy.actual_coords_y + enemy.rect.width < fighter.actual_coords_y)):
-            print(2)
             if fighter.side == 'left':
                 shift = -1
             else:
