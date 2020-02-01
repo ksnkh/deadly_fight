@@ -5,7 +5,7 @@ from change_fighter_position import change_position
 
 
 class Character(pygame.sprite.Sprite):
-    def __init__(self, name, side, collision_rect, *groups):
+    def __init__(self, name, side, *groups):
         super().__init__(groups)
         self.name = name
         self.side = side
@@ -13,15 +13,12 @@ class Character(pygame.sprite.Sprite):
             self.animation_settings = subzero_move_animations
             self.attack_animations = subzero_attack_animations
 
-        self.collision_rect = collision_rect
         if self.side == 'left':
             self.pos_x = 100
             self.pos_y = 140
-            self.collision_rect.offset = 20
         else:
             self.pos_x = 500
             self.pos_y = 140
-            self.collision_rect.offset = 50
 
         self.actual_coords_x = self.pos_x + 450
         self.actual_coords_y = self.pos_y

@@ -2,7 +2,7 @@ import pygame
 from change_fighter_position import change_position
 
 
-def update_y(fighter, enemy, f=False):
+def update_y(fighter, f=False):
     # UPDATE Y
     change_position(fighter, [0, fighter.vector[1]])
 

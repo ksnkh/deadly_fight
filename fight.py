@@ -5,7 +5,6 @@ from character import Character
 from camera import Camera
 from camera_focus import CameraFocus
 from wall import Wall
-from char_colide_sprite import ColisionRect
 from game_cycle import game_cycle
 from helth_bar import HelthBar
 from attack_list import AttackExecution
@@ -42,14 +41,12 @@ class Fight:
         lcw = Wall([-500, 0], all_sprites, camera_walls)
         rcw = Wall([800, 0], all_sprites, camera_walls)
         cf = CameraFocus(camera_walls, cfg)
-        lccr = ColisionRect([135, 340], char_collider_rect)
-        rccr = ColisionRect([635, 340], char_collider_rect)
         if self.fighter_side == 'right':
-            enemy = Character(self.enemy_char, 'left', rccr, fighters, all_sprites)
-            char = Character(self.your_char, 'right', lccr, fighters, all_sprites)
+            enemy = Character(self.enemy_char, 'left', fighters, all_sprites)
+            char = Character(self.your_char, 'right', fighters, all_sprites)
         else:
-            char = Character(self.your_char, 'left', rccr, fighters, all_sprites)
-            enemy = Character(self.enemy_char, 'right', lccr, fighters, all_sprites)
+            char = Character(self.your_char, 'left', fighters, all_sprites)
+            enemy = Character(self.enemy_char, 'right', fighters, all_sprites)
         chb = HelthBar(char, helth_bars)
         ehb = HelthBar(enemy, helth_bars)
         camera = Camera(cf)

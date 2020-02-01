@@ -12,6 +12,3 @@ def turn_frame(char, side):
 
     if char.turn:
         char.image = pygame.transform.flip(char.image, True, False)
-        char.collision_rect.offset = 80
-    else:
-        char.collision_rect.offset = 40
