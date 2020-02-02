@@ -1,5 +1,6 @@
 import pygame
 from subzero_animations_settings import subzero_move_animations, subzero_attack_animations
+from scorpion_animations_settings import scorpion_move_animations, scorpion_attack_animations
 from set_char_anim import set_char_anim
 from change_fighter_position import change_position
 
@@ -12,6 +13,9 @@ class Character(pygame.sprite.Sprite):
         if self.name == 'Sub-Zero':
             self.animation_settings = subzero_move_animations
             self.attack_animations = subzero_attack_animations
+        elif self.name == 'Scorpion':
+            self.animation_settings = scorpion_move_animations
+            self.attack_animations = scorpion_attack_animations
 
         if self.side == 'left':
             self.pos_x = 100
