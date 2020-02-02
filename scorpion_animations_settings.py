@@ -9,7 +9,7 @@ scorpion_move_animations = {'stand': [7, [58] * 6 + [49], [1] * 7, [0, 6], True,
                             'walk_b': [9, [58, 57, 58, 57, 57, 58, 58, 67, 58], [1] * 9, [0, 8], True, False],
                             'jump': [3, [54, 56, 45], [3, 3, 5], [0, 2], False, False],
                             'move_jump': [8, [49] * 8, [1] * 8, [1, 7], False, False],
-                            'duck': [3, [52] * 3, [1] * 5, [2, 2], False, False],
+                            'duck': [3, [56, 83, 44], [1] * 5, [2, 2], False, False],
                             'block': [1, [50], [1], [0, 0], False, False],
 
                             'high_punch': [3, [60, 60, 71], [1, 1, 5], [], False, [[2], 'weak_hit', 30, [4, 0]]],
