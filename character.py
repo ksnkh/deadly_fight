@@ -1,6 +1,7 @@
 import pygame
 from subzero_animations_settings import subzero_move_animations, subzero_attack_animations
 from scorpion_animations_settings import scorpion_move_animations, scorpion_attack_animations
+from jonny_cage_animations_settings import jonny_cage_move_animations, jonny_cage_attack_animations
 from set_char_anim import set_char_anim
 from change_fighter_position import change_position
 
@@ -16,6 +17,9 @@ class Character(pygame.sprite.Sprite):
         elif self.name == 'Scorpion':
             self.animation_settings = scorpion_move_animations
             self.attack_animations = scorpion_attack_animations
+        elif self.name == 'Johny_Cage':
+            self.animation_settings = jonny_cage_move_animations
+            self.attack_animations = jonny_cage_attack_animations
 
         if self.side == 'left':
             self.pos_x = 100
