@@ -38,6 +38,7 @@ cage_move_animations = {'stand': [7, [69] * 7, [1], [], True, False],
                         'trip': [6, [77, 78, 77, 84, 82, 84], [1], [], True, False],
                         'stand_up': [5, [36, 49, 52, 78, 61], [1], [], True, False],
                         'slide': [6, [64, 47, 46, 67, 89, 89], [1], [], True, False],
+                        'weak_hit': [4, [68, 67, 69, 56], [1], [], True, False],
 
                         'dead': [7, [60, 56, 56, 57, 56, 58, 58], [1], [], True, False]
                         }
