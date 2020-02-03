@@ -4,7 +4,7 @@ from load_image import load_image
 from main_menu import MainMenu
 from settings import Settings
 from fight import Fight
-from server import select_fighter
+from host_game import select_fighter
 from egg import Egg
 from connect_to_server import Connect
 
