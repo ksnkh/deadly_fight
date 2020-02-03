@@ -5,6 +5,7 @@ pygame.mixer.init()
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
 
+
 class select_fighter():
     def __init__(self):
         global hero_guest
@@ -110,6 +111,7 @@ class select_fighter():
             cycle += 1
 
     def run(self):
+        print(1)
         image_5 = pygame.image.load('backgrounds\заднийфон.jpg')
         screen.blit(image_5, (0, 0))
         screen.blit(self.player_1, (522, 42))

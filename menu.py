@@ -3,8 +3,8 @@ from music import Music, Sound
 from load_image import load_image
 from main_menu import MainMenu
 from settings import Settings
-from fight import Fight
-from host_game import select_fighter
+from choose_fighter_host import Fight
+from choose_fighter_client import select_fighter
 from egg import Egg
 from connect_to_server import Connect
 
@@ -46,6 +46,7 @@ while True:
     elif t == 'fight':
         current_menu = fightC
     elif t == 'connect to server':
+        print(12)
         current_menu = fighterC
     elif t == 'legendary_egg':
         current_menu = eggC
