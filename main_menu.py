@@ -24,9 +24,9 @@ class MainMenu:
 
     def clicked(self, paragraph_number):
         if paragraph_number == 0:
-            return 'server_connect'
+            return 'connect to server'
         elif paragraph_number == 1:
-            return 'fight'
+            return 'choose fighter h'
         elif paragraph_number == 2:
             return 'settings'
         elif paragraph_number == 3:
