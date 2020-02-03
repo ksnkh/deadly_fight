@@ -3,8 +3,8 @@ liu_kang_move_animations = {'stand': [8, [58] * 8, [1] * 8, [0, 7], True, False]
                             'walk_b': [9, [59, 46, 44, 45, 44, 47, 43, 47], [1] * 9, [0, 8], True, False],
                             'jump': [4, [62, 55, 59, 50], [3, 3, 5, 3], [0, 3],  False, False],
                             'move_jump': [9, [47, 41, 51, 56, 52, 43, 47, 57, 50], [1] * 9, [1, 8], False, False],
-                             # duck
-                             'block': [1, [44], [1], [0, 0], False, False],
+                            'duck': [3, [57, 59,  48], [1] * 3, [0,2], True, False],
+                            'block': [1, [44], [1], [0, 0], False, False],
 
                             'low_punch': [3, [67, 63, 77], [1, 1, 5], [], False, [[2], 'weak_hit', 30, [4, 0]]],
                             'low_kick': [5, [56, 51, 49, 55, 74], [1, 1, 1, 1, 3],
@@ -34,5 +34,5 @@ liu_kang_move_animations = {'stand': [8, [58] * 8, [1] * 8, [0, 7], True, False]
                             }
 
 
-liu_kang_attack_animations = ['low_punch', 'high_punch', 'low_kick', 'high_kick', 'uppercut', 'sweep_kick', 'roundhouse',
-                             'throw', 'air_kick', 'bicycle_kick']
+liu_kang_attack_animations = ['low_punch', 'high_punch', 'low_kick', 'high_kick', 'uppercut', 'sweep_kick',
+                              'roundhouse', 'air_kick', 'bicycle_kick']
