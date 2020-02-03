@@ -9,10 +9,12 @@ screen = pygame.display.set_mode(size)
 class select_fighter():
     def __init__(self):
         global hero_guest
+        self.cycle = 0
         self.paragraph = 0
-        self.points = [(65, 380, 'Ваш', (128, 128, 128), (204, 29, 0), 0),
-                       (65, 415, 'герой', (128, 128, 128), (204, 29, 0), 0),
-                       (65, 500, 'Выход', (128, 128, 128), (204, 29, 0), 1)]
+        self.points = [[65, 380, 'Ваш', (128, 128, 128), (204, 29, 0), 0],
+                       [65, 415, 'герой', (128, 128, 128), (204, 29, 0), 0],
+                       [200, 500, 'готов', (128, 128, 128), (204, 29, 0), 2],
+                       [65, 500, 'Выход', (128, 128, 128), (204, 29, 0), 1]]
         self.heroes = [(185, 347, 'Джони Кейдж', (128, 128, 128), (204, 29, 0), 0),
                        (322, 347, 'Скорпион', (128, 128, 128), (204, 29, 0), 1),
                        (433, 347, 'Соня Блейд', (128, 128, 128), (204, 29, 0), 2),
@@ -96,6 +98,13 @@ class select_fighter():
             pygame.display.flip()
         elif self.paragraph == 1:
             return 'main'
+        elif self.paragraph == 2:
+            if self.cycle == 0:
+                self.points[2][2] = 'готов X'
+                self.cycle += 1
+            else:
+                self.points[2][2] = 'готов'
+                self.cycle -= 1
 
     def drawing_heroes(self, surface, font_menu, number_point):
         cycle = 0
@@ -131,9 +140,9 @@ class select_fighter():
                 elif i.type == pygame.KEYDOWN:
                     # меняем подсвечиваемую кнопку кнопками верх/вниз, если это возможно
                     if i.key == pygame.K_UP:
-                        self.paragraph = (self.paragraph - 1) % 2
+                        self.paragraph = (self.paragraph - 1) % 3
                     if i.key == pygame.K_DOWN:
-                        self.paragraph = (self.paragraph + 1) % 2
+                        self.paragraph = (self.paragraph + 1) % 3
                     # вызываем действия от подсвечиваемой кнопки при нажатии на enter
                     if i.key == 13:
                         called_menu = self.clicked(self.paragraph)
