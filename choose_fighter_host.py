@@ -6,7 +6,7 @@ size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
 
 
-class Fight:
+class ChooseFighterH:
     def __init__(self):
         self.paragraph = 0
         self.cycle = 0
@@ -34,7 +34,6 @@ class Fight:
                            ('3', (440, 480, 81, 81), (128, 128, 128), (204, 29, 0), 2)]
         self.player_1 = pygame.image.load('heroes\джони_бой.jpg')
         self.called_menu = None
-        self
 
     def drawing(self, surface, font_menu, number_point):
         pygame.draw.rect(surface, (255, 255, 255), (40, 40, 240, 240), 3)
