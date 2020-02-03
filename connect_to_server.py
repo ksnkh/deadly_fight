@@ -21,6 +21,7 @@ keyboard = {'49': '1',
 
 class Connect:
     def __init__(self):
+        self.cycle = 0
         self.number_server = ''
         self.paragraph = 0
         self.points = [[220, 35, '', (200, 200, 200), (200, 200, 200), 0],
@@ -44,7 +45,13 @@ class Connect:
         if paragraph_number == 0:
             return 'main'
         elif paragraph_number == 1:
-            return 'connect to server'
+            if self.cycle == 0:
+                self.points[3][2] = 'Подключиться X'
+                self.cycle += 1
+            else:
+                self.points[3][2] = 'Подключиться'
+                self.cycle -= 1
+            #return 'connect to server'
 
     def run(self):
         image_5 = pygame.image.load('backgrounds\скорпион.png')
