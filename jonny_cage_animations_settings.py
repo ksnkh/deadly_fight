@@ -16,37 +16,37 @@
 # урон 2 - анимация получения урона от атаки 3 - урон 4 - вектор отбрасывания
 
 # последние 4 значения однотипны и недоделаны(Санёк, займешься этим?))
-jonny_cage_move_animations = {'stand': [7, [69, 69, 65, 69, 69, 69, 67], [1] * 12, [0, 6], True, False],
-                           'walk_f': [9, [74, 60, 59, 60, 61, 59, 60, 61, 61], [1] * 9, [0, 8], True, False],
-                           'walk_b': [9, [74, 60, 59, 60, 61, 59, 60, 61, 61], [1] * 9, [0, 8], True, False],
-                           'jump': [3, [47, 62, 71], [3, 3, 5], [0, 2], False, False],
-                           'move_jump': [8, [50, 49, 53, 58, 51, 49, 56, 62], [1] * 8, [1, 7], True, False],
-                           'duck': [3, [77, 77, 56], [1] * 5, [2, 2], False, False],
-                           'block': [2, [62, 50], [1], [0, 1], True, False],
+jonny_cage_move_animations = {'stand': [7, [69, 67, 66, 66, 67, 68, 80], [1] * 12, [0, 6], True, False],
+                              'walk_f': [9, [74, 60, 59, 60, 61, 59, 60, 61, 61], [1] * 9, [0, 8], True, False],
+                              'walk_b': [9, [71, 60, 61, 60, 60, 61, 60, 60, 60], [1] * 9, [0, 8], True, False],
+                              'jump': [3, [47, 62, 71], [3, 3, 5], [0, 2], False, False],
+                              'move_jump': [8, [47, 49, 55, 57, 50, 49, 57, 63], [1] * 8, [1, 7], True, False],
+                              'duck': [3, [74, 61, 60], [1] * 5, [2, 2], False, False],
+                              'block': [2, [61, 69], [1] * 2, [0, 0], True, False],
 
-                           'low_punch': [3, [73, 57, 75], [1, 1, 5], [], False, [[1], 'weak_hit', 30, [4, 0]]],
-                           'high_punch': [3, [62, 57, 68], [1, 1, 5], [], False, [[2], 'weak_hit', 30, [4, 0]]],
-                           'high_kick': [6, [63, 49, 47, 67, 80, 75], [1],
-                                         [1, 1, 1, 1, 3, 1], [], False, [[4], 'weak_hit', 50, [6, 0]]],
-                           'low_kick': [5, [64, 63, 46, 66, 91], [1], [1, 1, 1, 3, 1], [], False,
-                                        [[4], 'weak_hit', 50, [6, 0]]],
-                           'uppercut': [5, [68, 63, 58, 41, 47], [1, 1, 1, 6, 1], [],
-                                        False, [[2, 3, 4], 'heavy_hit', 60, [10, -20]]],
-                           'sweep_kick': [7, [56, 56, 59, 91, 53, 78, 73], [1] * 7, [], False,
-                                          [[3, 4], 'trip', 40, [0, 0]]],
-                           'roundhouse': [7, [49, 66, 73, 57, 38, 43, 66], [1] * 7, [], False,
-                                          [[2, 3], 'heavy_hit', 70, [10, -20]]],
-                           # special move for johny kage
-                           'egg_broken': [6, [86, 100, 109, 113, 113, 113], [1] * 6, [], False,
-                                          [[1], 'weak_hit', 30, [4, 0]]],
-                           'air_kick': [2, [50, 50], [3, 3], [], False, [[1], 'heavy_hit', 40, [7, 0]]],
-                           'trip': [6, [77, 78, 77, 84, 82, 84], [1] * 6, [], False, False],
-                           'stand_up': [5, [36, 49, 52, 78, 61], [1] * 5, [], False, False],
-                           'slide': [6, [64, 47, 46, 67, 89, 89], [1], [], True, False],
-                           'weak_hit': [4, [68, 67, 69, 56], [1] * 4, [], False, False],
+                              'low_punch': [3, [73, 57, 75], [1, 1, 5], [], False, [[1], 'weak_hit', 30, [4, 0]]],
+                              'high_punch': [3, [62, 57, 68], [1, 1, 5], [], False, [[2], 'weak_hit', 30, [4, 0]]],
+                              'high_kick': [6, [63, 49, 47, 67, 80, 75], [1],
+                                            [1, 1, 1, 1, 3, 1], [], False, [[4], 'weak_hit', 50, [6, 0]]],
+                              'low_kick': [5, [65, 46, 45, 67, 90], [1], [1, 1, 1, 3, 1], [], False,
+                                           [[4], 'weak_hit', 50, [6, 0]]],
+                              'uppercut': [5, [77, 74, 69, 53, 55], [1, 1, 1, 6, 1], [],
+                                           False, [[2, 3, 4], 'heavy_hit', 60, [10, -20]]],
+                              'sweep_kick': [7, [56, 56, 59, 91, 53, 78, 73], [1] * 7, [], False,
+                                             [[3, 4], 'trip', 40, [0, 0]]],
+                              'roundhouse': [7, [49, 66, 73, 57, 38, 43, 66], [1] * 7, [], False,
+                                             [[2, 3], 'heavy_hit', 70, [10, -20]]],
+                              # special move for johny kage
+                              'egg_broken': [6, [86, 100, 109, 113, 113, 113], [1] * 6, [], False,
+                                             [[1], 'weak_hit', 30, [4, 0]]],
+                              'air_kick': [2, [50, 50], [3, 3], [], False, [[1], 'heavy_hit', 40, [7, 0]]],
+                              'trip': [6, [77, 78, 77, 84, 82, 84], [1] * 6, [], False, False],
+                              'stand_up': [5, [36, 49, 52, 78, 61], [1] * 5, [], False, False],
+                              'slide': [6, [64, 47, 46, 67, 89, 89], [1], [], True, False],
+                              'weak_hit': [4, [68, 67, 69, 56], [1] * 4, [], False, False],
 
-                           'dead': [7, [60, 56, 56, 57, 56, 58, 58], [2] * 7, [0, 6], False, False]
-                            }
-jonny_cage_attack_animations = ['low_punch', 'high_punch', 'low_kick', 'high_kick', 'uppercut', 'sweep_kick', 'roundhouse',
-                             'throw', 'air_kick']
-
+                              'dead': [7, [60, 56, 56, 57, 56, 58, 58], [2] * 7, [0, 6], False, False]
+                              }
+jonny_cage_attack_animations = ['low_punch', 'high_punch', 'low_kick', 'high_kick', 'uppercut', 'sweep_kick',
+                                'roundhouse',
+                                'throw', 'air_kick']
