@@ -44,7 +44,7 @@ class Connect:
         if paragraph_number == 0:
             return 'main'
         elif paragraph_number == 1:
-            return 'connect to server'
+            return 'choose fighter c'
 
     def run(self):
         image_5 = pygame.image.load('backgrounds\скорпион.png')

@@ -8,8 +8,6 @@ screen = pygame.display.set_mode(size)
 
 class Fight:
     def __init__(self):
-        global main_map
-        global hero_creator
         self.paragraph = 0
         self.cycle = 0
         self.points = [[65, 380, 'Ваш', (128, 128, 128), (204, 29, 0), 0],
@@ -36,6 +34,7 @@ class Fight:
                            ('3', (440, 480, 81, 81), (128, 128, 128), (204, 29, 0), 2)]
         self.player_1 = pygame.image.load('heroes\джони_бой.jpg')
         self.called_menu = None
+        self
 
     def drawing(self, surface, font_menu, number_point):
         pygame.draw.rect(surface, (255, 255, 255), (40, 40, 240, 240), 3)
@@ -153,7 +152,6 @@ class Fight:
             else:
                 self.points[5][2] = 'Готов'
                 self.cycle -= 1
-
 
     def drawing_maps(self, surface, font_menu, number_point):
         cycle = 0
