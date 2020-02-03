@@ -11,11 +11,13 @@ class Fight:
         global main_map
         global hero_creator
         self.paragraph = 0
-        self.points = [(65, 380, 'Ваш', (128, 128, 128), (204, 29, 0), 0),
-                       (65, 415, 'герой', (128, 128, 128), (204, 29, 0), 0),
-                       (65, 490, 'Карта', (128, 128, 128), (204, 29, 0), 1),
-                       (65, 525, 'боя', (128, 128, 128), (204, 29, 0), 1),
-                       (650, 525, 'Выход', (128, 128, 128), (204, 29, 0), 2)]
+        self.cycle = 0
+        self.points = [[65, 380, 'Ваш', (128, 128, 128), (204, 29, 0), 0],
+                       [65, 415, 'герой', (128, 128, 128), (204, 29, 0), 0],
+                       [65, 490, 'Карта', (128, 128, 128), (204, 29, 0), 1],
+                       [65, 525, 'боя', (128, 128, 128), (204, 29, 0), 1],
+                       [650, 525, 'Выход', (128, 128, 128), (204, 29, 0), 3],
+                       [650, 480, 'Готов', (128, 128, 128), (204, 29, 0), 2]]
         self.heroes = [(185, 347, 'Джонни Кейдж', (128, 128, 128), (204, 29, 0), 0),
                        (322, 347, 'Скорпион', (128, 128, 128), (204, 29, 0), 1),
                        (433, 347, 'Соня Блейд', (128, 128, 128), (204, 29, 0), 2),
@@ -140,8 +142,18 @@ class Fight:
             elif self.paragraph == 2:
                 main_map = 'подземелье'
             self.paragraph = 0
-        elif self.paragraph == 2:
+        elif self.paragraph == 3:
+            self.points[5][2] = 'Готов'
+            self.cycle = 0
             return 'main'
+        elif self.paragraph == 2:
+            if self.cycle == 0:
+                self.points[5][2] = 'Готов X'
+                self.cycle += 1
+            else:
+                self.points[5][2] = 'Готов'
+                self.cycle -= 1
+
 
     def drawing_maps(self, surface, font_menu, number_point):
         cycle = 0
@@ -189,9 +201,9 @@ class Fight:
                 elif i.type == pygame.KEYDOWN:
                     # меняем подсвечиваемую кнопку кнопками верх/вниз, если это возможно
                     if i.key == pygame.K_UP:
-                        self.paragraph = (self.paragraph - 1) % 3
+                        self.paragraph = (self.paragraph - 1) % 4
                     if i.key == pygame.K_DOWN:
-                        self.paragraph = (self.paragraph + 1) % 3
+                        self.paragraph = (self.paragraph + 1) % 4
                     # вызываем действия от подсвечиваемой кнопки при нажатии на enter
                     if i.key == 13:
                         called_menu = self.clicked(self.paragraph)
