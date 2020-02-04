@@ -151,11 +151,12 @@ class ChooseFighterH:
                     msg = self.client_socket.recv(BUFSIZE)
                     try:
                         info = pickle.loads(msg)
-                        if info[0] == 'start fight':
+                        key = info[0]
+                        if key == 'start fight':
                             self.called_menu = info[0]
                             self.info += info[1]
 
-                        elif info[0] == 'not ready':
+                        elif key == 'not ready':
 
                             for f in info[1]:
                                 if f[0] == self.player_id:
@@ -168,14 +169,20 @@ class ChooseFighterH:
                                             self.enemy_char.fill((128, 128, 128))
                                             self.enemy_char.blit(pygame.transform.flip(h[4], True, False), [2, 2])
 
+                        elif key == 'enemy disconnected':
+                            self.enemys_fighter = None
+                            self.enemy_char = pygame.Surface([240, 240])
+                            self.enemy_char.fill((128, 128, 128))
+                            self.enemy_char.blit(self.enemy_char, [2, 2])
+
                     except pickle.UnpicklingError:
                         continue
                 except OSError:  # Possibly client has left the chat.
                     break
 
-        os.startfile('start server.exe')
+        os.startfile('start server.bat')
 
-        HOST = "127.0.0.1"  # input('Enter host: ')
+        HOST = "192.168.1.153"  # input('Enter host: ')
         PORT = 33000  # input('Enter port: ')
         BUFSIZE = 1024
         self.client_socket = socket(AF_INET, SOCK_STREAM)

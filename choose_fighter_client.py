@@ -116,14 +116,15 @@ class ChooseFighterC:
         def receive(self):
             while True:
                 try:
-                    msg = client_socket.recv(BUFSIZE)
+                    msg = self.client_socket.recv(BUFSIZE)
                     try:
                         info = pickle.loads(msg)
-                        if info[0] == 'start fight':
-                            self.called_menu = info[0]
+                        key = info[0]
+                        if key == 'start fight':
+                            self.called_menu = 'start fight'
                             self.info += info[1]
 
-                        elif info[0] == 'not ready':
+                        elif key == 'not ready':
 
                             for f in info[1]:
                                 if f[0] == player_id:
@@ -134,6 +135,8 @@ class ChooseFighterC:
                                             self.enemy_char = pygame.Surface([240, 240])
                                             self.enemy_char.fill((128, 128, 128))
                                             self.enemy_char.blit(h[4], [2, 2])
+                        elif key == 'server is down':
+                            self.called_menu = 'main'
 
                     except pickle.UnpicklingError:
                         continue
@@ -143,16 +146,16 @@ class ChooseFighterC:
         HOST = self.ip
         PORT = 33000  # input('Enter port: ')
         BUFSIZE = 1024
-        client_socket = socket(AF_INET, SOCK_STREAM)
+        self.client_socket = socket(AF_INET, SOCK_STREAM)
         try:
-            client_socket.connect((HOST, PORT))
+            self.client_socket.connect((HOST, PORT))
         except OSError:
             return ['main']
         receive_thread = Thread(target=receive, args=(self,))
         receive_thread.start()
 
         player_id = str(random.randint(1, 1000000))
-        client_socket.send(bytes(f"{player_id} right", "utf8"))
+        self.client_socket.send(bytes(f"{player_id} right", "utf8"))
 
         running = True
         self.called_menu = None
@@ -172,7 +175,7 @@ class ChooseFighterC:
 
             if self.called_menu is not None:
                 running = False
-            client_socket.send(pickle.dumps([self.chosen_fighter, self.ready]))
+            self.client_socket.send(pickle.dumps([self.chosen_fighter, self.ready]))
             pygame.display.flip()
         screen.fill(pygame.Color('black'))
         return [self.called_menu, self.info]

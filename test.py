@@ -1,1 +1,2 @@
-print(1 == None)
+a = {1: 2, 3: 4}
+a.popitem()

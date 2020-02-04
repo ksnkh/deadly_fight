@@ -30,7 +30,6 @@ setting_music = ['Музыка: вкл',
 gold_egg = '0'
 m = Music()
 s = Sound()
-m.play()
 current_menu = MainMenu()
 while True:
     t = current_menu.run()

@@ -2,68 +2,122 @@ from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 import pickle
 import os
-import sys
 
 
 def accept_incoming_connections():  # новое подключение
-    while True:
+    while not STOP_THREADS:
         client, client_address = SERVER.accept()
         print(f"Новый игрок {client_address}")
         Thread(target=handle_client, args=(client,)).start()
 
 
 def handle_client(client):  # Takes client socket as argument.
+    global STOP_THREADS
+    global GAME_IS_ON
     player_id, side = client.recv(BUFSIZE).decode("utf8").split()
 
-    if len(fighters) == 2:
+    if len(PLAYERS) == 2:
         return
     # [id, chosen fighter, side, ready]
-    fighters[client] = [player_id, '', side, False]
+    PLAYERS[client] = Player(client, player_id, side)
 
-    global game_is_on
-    global map_name
+    def broadcast(msg):  # разослать сообщение всем клиентам
+        for f in PLAYERS:
+            f.send(msg)
 
-    while True:
-        print(fighters)
+    def send_info_to_enemy(client, msg):
+        for f in PLAYERS:
+            if f != client:
+                f.send(msg)
+
+    def send_info_to_client(client, msg):
+        for f in PLAYERS:
+            if f == client:
+                f.send(msg)
+
+    def get_char_info(player, key):
+        if key == 'start game':
+            return [player.id, player.fighter, player.side]
+        elif key == 'update_lobby':
+            return [player.id, player.fighter]
+
+    def start_game():
+        global FIGHTER1
+        global FIGHTER2
+        fighters = [p for p in PLAYERS]
+        FIGHTER1 = fighters[0]
+        FIGHTER2 = fighters[1]
+        broadcast(pickle.dumps([get_char_info(FIGHTER1, 'start game'), get_char_info(FIGHTER2, 'start game'), MAP]))
+
+    global MAP
+    global DISCONNECTING_PLAYER
+
+    while not STOP_THREADS and not GAME_IS_ON:
         msg = client.recv(BUFSIZE)
         s = pickle.loads(msg)
         if s[0] == 'exit':
-
-            if fighters[client][2] == 'left':
-                execute()
+            if PLAYERS[client].side == 'left':
+                send_info_to_enemy(client, pickle.dumps(['server is down']))
+                STOP_THREADS = True
             else:
-                del fighters[client]
-                break
-        fighters[client][1] = s[0]
-        fighters[client][3] = s[1]
+                DISCONNECTING_PLAYER = True
+                send_info_to_enemy(client, pickle.dumps(['enemy disconnected']))
+                return
+        if DISCONNECTING_PLAYER and PLAYERS[client].side == 'left':
+            print(PLAYERS)
+            PLAYERS.popitem()
+            DISCONNECTING_PLAYER = False
+            print(PLAYERS)
+
+        PLAYERS[client].fighter = s[0]
+        PLAYERS[client].ready = s[1]
         if len(s) == 3:
-            map_name = s[2]
-        ready = [c[3] for c in fighters.values()]
+            MAP = s[2]
+        ready = [p.ready for p in PLAYERS.values()]
         if len(ready) == 2:
-            if game_is_on:
+            if GAME_IS_ON:
                 break
             if ready[0] and ready[1]:
-                game_is_on = True
-                info = ['start fight', [f[:3] for f in fighters.values()]]
+                GAME_IS_ON = True
+                info = ['start fight', [f[:3] for f in PLAYERS.values()]]
                 broadcast(pickle.dumps(info))
                 break
             else:
-                info = ['not ready', [f[:2] for f in fighters.values()]]
+                info = ['not ready', [get_char_info(f, 'update_lobby') for f in PLAYERS.values()]]
                 broadcast(pickle.dumps(info))
+
     return
 
 
-def broadcast(msg):  # разослать сообщение всем клиентам
-    for sock in fighters:
-        sock.send(msg)
-
-
 def execute():
+    print(1)
     os.system("taskkill /F /PID " + str(os.getppid()))
 
-fighters = {}
-game_is_on = False
-map_name = None
+
+class Player:
+    def __init__(self, client, id, side):
+        self.client = client
+        self.id = id
+        self.side = side
+        self.ready = False
+        self.fighter = ''
+        self.pos = []
+        self.actual_pos = []
+        self.cur_anim = ''
+        self.cur_frame = 0
+        self.frame_time = 0
+        self.damage = 0
+        self.on_ground = True
+        self.getting_damage = False
+        self.attacking = False
+        self.hit = False
+
+PLAYERS = {}
+FIGHTER1 = None
+FIGHTER2 = None
+GAME_IS_ON = False
+MAP = None
+DISCONNECTING_PLAYER = None
 
 HOST = ''
 PORT = 33000
@@ -73,11 +127,13 @@ SERVER = socket(AF_INET, SOCK_STREAM)
 SERVER.bind((HOST, PORT))
 
 if __name__ == "__main__":
-    SERVER.listen(5)
+    SERVER.listen(1)
     print("Ждем подключения...")
+    STOP_THREADS = False
     ACCEPT_THREAD = Thread(target=accept_incoming_connections)
     ACCEPT_THREAD.start()
-    print(23)
-    ACCEPT_THREAD.join()
-    print(76)
+    while not STOP_THREADS:
+        pass
+    print('join on')
     SERVER.close()
+    execute()
