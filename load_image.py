@@ -8,7 +8,7 @@ screen = pygame.display.set_mode(size)
 
 
 def load_image(name, color_key=None):
-    fullname = os.path.join('data', name)
+    fullname = os.path.join(name)
     try:
         image = pygame.image.load(fullname)
     except pygame.error as message:

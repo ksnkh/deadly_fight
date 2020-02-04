@@ -245,5 +245,5 @@ class Settings:
             screen.blit(screen, (0, 0))
             pygame.display.flip()
         screen.fill(pygame.Color('black'))
-        return called_menu
+        return [called_menu]
 

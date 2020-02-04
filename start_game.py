@@ -1,6 +1,6 @@
 import pygame
 from music import Music, Sound
-from load_image import load_image
+import sys
 from main_menu import MainMenu
 from settings import Settings
 from choose_fighter_host import ChooseFighterH
@@ -34,19 +34,20 @@ m.play()
 current_menu = MainMenu()
 while True:
     t = current_menu.run()
-    if t == 'settings':
+    if t[0] == 'settings':
         current_menu = Settings(m, s)
-    elif t == 'main':
+    elif t[0] == 'main':
         current_menu = MainMenu()
-    elif t == 'start fight':
-        current_menu = Fight()
-    elif t == 'connect to server':
+    elif t[0] == 'start fight':
+        current_menu = Fight(t[1])
+    elif t[0] == 'connect to server':
         current_menu = Connect()
-    elif t == 'legendary_egg':
+    elif t[0] == 'legendary_egg':
         current_menu = Egg()
-    elif t == 'choose fighter h':
+    elif t[0] == 'choose fighter h':
         current_menu = ChooseFighterH()
-    elif t == 'choose fighter c':
-        current_menu = ChooseFighterC()
-
-
+    elif t[0] == 'choose fighter c':
+        current_menu = ChooseFighterC(t[1])
+    elif t[0] == 'exit':
+        print('exit')
+        sys.exit()

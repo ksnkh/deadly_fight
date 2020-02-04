@@ -30,7 +30,7 @@ class MainMenu:
         elif paragraph_number == 2:
             return 'settings'
         elif paragraph_number == 3:
-            sys.exit()
+            return 'exit'
 
     def run(self):
         image_6 = pygame.image.load('backgrounds\он_скорпион3.jpg')
@@ -64,4 +64,4 @@ class MainMenu:
             screen.blit(screen, (0, 0))
             pygame.display.flip()
         screen.fill(pygame.Color('black'))
-        return called_menu
+        return [called_menu]
