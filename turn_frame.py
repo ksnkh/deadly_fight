@@ -9,6 +9,3 @@ def turn_frame(char, side):
             char.turn = True
         else:
             char.turn = False
-
-    if char.turn:
-        char.image = pygame.transform.flip(char.image, True, False)

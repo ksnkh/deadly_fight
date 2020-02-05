@@ -6,6 +6,7 @@ from camera_focus import CameraFocus
 from game_cycle import game_cycle
 from helth_bar import HelthBar
 from attack_list import AttackExecution
+import random
 
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
@@ -31,11 +32,11 @@ class Fight:
         bgr = Background(f"maps/{self.map_name}.png", all_sprites, bground)
         cf = CameraFocus(cfg)
         if self.fighter_side == 'right':
-            enemy = Character(self.enemy_char, 'left', fighters, all_sprites)
-            char = Character(self.your_char, 'right', fighters, all_sprites)
+            enemy = Character(self.enemy_char, 'left', random.randint(0, 1000000), fighters, all_sprites)
+            char = Character(self.your_char, 'right', random.randint(0, 1000000), fighters, all_sprites)
         else:
-            char = Character(self.your_char, 'left', fighters, all_sprites)
-            enemy = Character(self.enemy_char, 'right', fighters, all_sprites)
+            char = Character(self.your_char, 'left', random.randint(0, 1000000), fighters, all_sprites)
+            enemy = Character(self.enemy_char, 'right', random.randint(0, 1000000), fighters, all_sprites)
         chb = HelthBar(char, helth_bars)
         ehb = HelthBar(enemy, helth_bars)
         camera = Camera(cf)

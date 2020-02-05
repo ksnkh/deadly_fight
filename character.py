@@ -7,7 +7,7 @@ from change_fighter_position import change_position
 
 
 class Character(pygame.sprite.Sprite):
-    def __init__(self, name, side, *groups):
+    def __init__(self, name, side, id, *groups):
         super().__init__(groups)
         self.name = name
         self.side = side
@@ -51,6 +51,7 @@ class Character(pygame.sprite.Sprite):
         self.damage = 0
         self.getting_damage = False
         self.dead = False
+        self.id = id
         change_position(self, self.vector)
 
 

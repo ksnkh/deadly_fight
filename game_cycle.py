@@ -4,7 +4,6 @@ from update_position_and_animation import update_pos_and_anim
 from update_character_img import update_img
 from update_combo_list import update_combo_list
 from collision import collision
-from subzero_animations_settings import subzero_attack_animations
 
 pygame.init()
 pygame.mixer.init()
@@ -74,14 +73,15 @@ def game_cycle(screen, char, enemy, camera, cf, chb, ehb, alg, all_sprites, cfg,
         else:
             char.block = False
 
-        if pygame.key.get_pressed()[pygame.K_a]:
-            move(char, -1)
+        if not char.dead:
+            if pygame.key.get_pressed()[pygame.K_a]:
+                move(char, -1)
 
-        if pygame.key.get_pressed()[pygame.K_d]:
-            move(char, 1)
+            if pygame.key.get_pressed()[pygame.K_d]:
+                move(char, 1)
 
-        if pygame.key.get_pressed()[pygame.K_w]:
-            jump(char)
+            if pygame.key.get_pressed()[pygame.K_w]:
+                jump(char)
 
         # char updates
         update_pos_and_anim(char, enemy, True)

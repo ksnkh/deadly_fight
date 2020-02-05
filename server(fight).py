@@ -1,6 +1,10 @@
 import socket  # import AF_INET, socket, SOCK_STREAM, gethostbyname, gethostname
 from threading import Thread
 import pickle
+from character import Character
+from update_position_and_animation import update_pos_and_anim
+from update_character_img import update_img
+from apply_damage import apply_damage
 
 
 def accept_incoming_connections():  # новое подключение
@@ -11,11 +15,29 @@ def accept_incoming_connections():  # новое подключение
 
 
 def handle_client(client):  # Takes client socket as argument.
-    player_id, player_name = client.recv(BUFSIZE).decode("utf8").split()
-    clients[client] = (player_id, player_name)
-    if fighters:
-        fighters[client] = ['Sub-Zero', 'right', ]
+    def send_char_info(fighter):
+        broadcast(pickle.dumps([player_id, fighter.pos_x, fighter.pos_y, fighter.actual_coords_x, fighter.actual_coords_y,
+                                fighter.helth, fighter.cur_anim, fighter.cur_frame, fighter.turn, fighter.block,
+                                fighter.ducked]))
 
+    player_id, side = client.recv(BUFSIZE).decode("utf8").split()
+    if len(fighters) < 3:
+        if fighters:
+            fighter = Character('Sub-Zero', 'right', player_id)
+        else:
+            fighter = Character('Sub-Zero', 'left', player_id)
+        fighters[client] = fighter
+    else:
+        return
+
+    while len(fighters) < 2:
+        pass
+
+    for f in fighters.items():
+        if f != fighter:
+            enemy = f
+
+    # MAIN GAME CYCLE
     while True:
         try:
             msg = client.recv(BUFSIZE)
@@ -24,10 +46,19 @@ def handle_client(client):  # Takes client socket as argument.
                     s = pickle.loads(msg)
                 except pickle.UnpicklingError:
                     continue
-                old = positions[player_id]
-                positions[player_id] = ((old[0] + s[0]) % 600, (old[1] + s[1]) % 600)
+                if s[0] == 'update':
+                    fighter.vector = s[1]
+                    fighter.attack = s[2]
+                    fighter.ducked = s[3]
+                    fighter.block = s[4]
+                    fighter.previos_moves = s[5]
+                    new_anim = update_pos_and_anim(fighter, enemy)
+                elif s[0] == 'img update':
+                    update_img(fighter, fighter.side)
+                elif s[0] == 'attack':
+                    apply_damage(enemy, s[1])
+                send_char_info(fighter)
                 # print(positions)
-                broadcast(pickle.dumps(positions))
             else:
                 print(f"{player_name} вышел из игры")
                 client.send(bytes("{quit}", "utf8"))
