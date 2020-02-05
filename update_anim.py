@@ -1,0 +1,75 @@
+def update_anim(fighter):
+    if fighter.getting_damage:
+        return
+
+    elif fighter.dead:
+        if fighter.cur_anim != 'dead':
+            fighter.cur_anim = 'dead'
+
+    elif fighter.attack:
+        if fighter.attack == 'high_punch' and fighter.cur_anim != 'high_punch' and fighter.on_ground:
+            if fighter.cur_anim == 'duck' and fighter.cur_anim != 'uppercut':
+                fighter.cur_anim = 'uppercut'
+            elif fighter.cur_anim != 'duck' and fighter.cur_anim != 'uppercut':
+                fighter.cur_anim = 'high_punch'
+
+        if fighter.attack == 'low_punch' and fighter.cur_anim != 'low_punch' and fighter.on_ground:
+            print(fighter.cur_anim)
+            if fighter.previos_moves:
+                if fighter.previos_moves[-1][0] == 'walk_f' and fighter.cur_anim != 'throw':
+                    fighter.cur_anim = 'throw'
+            elif fighter.cur_anim != 'throw':
+                fighter.cur_anim = 'low_punch'
+
+        if fighter.attack == 'high_kick' and fighter.cur_anim != 'high_kick' and fighter.on_ground:
+            if fighter.previos_moves:
+                if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'roundhouse':
+                    fighter.cur_anim = 'roundhouse'
+                if fighter.previos_moves[-1][0] == 'sweep_kick' and fighter.cur_anim != 'slide' and fighter.name == 'Sub-Zero':
+                    fighter.cur_anim = 'slide'
+            elif fighter.cur_anim != 'roundhouse':
+                fighter.cur_anim = 'high_kick'
+
+        if fighter.attack == 'low_kick' and fighter.cur_anim != 'low_kick':
+            if fighter.previos_moves:
+                if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'sweep_kick':
+                    fighter.cur_anim = 'sweep_kick'
+            if not fighter.on_ground and fighter.cur_anim != 'air_kick' and fighter.cur_anim != 'sweep_kick':
+                print(1)
+                fighter.cur_anim = 'air_kick'
+            elif fighter.cur_anim != 'sweep_kick' and fighter.on_ground and fighter.cur_anim != 'sweep_kick':
+                fighter.cur_anim = 'low_kick'
+
+    else:
+        if fighter.on_ground and fighter.ducked and fighter.cur_anim != 'duck':
+            fighter.cur_anim = 'duck'
+
+        elif fighter.on_ground and not fighter.ducked and fighter.cur_anim == 'duck' and fighter.cur_frame == 2:
+            fighter.cur_frame = 3
+
+        elif fighter.on_ground and fighter.block and fighter.cur_anim != 'block':
+            fighter.cur_anim = 'block'
+
+        elif fighter.vector[0] != 0 and fighter.cur_anim != 'walk_f' and fighter.on_ground and\
+                (fighter.vector[0] > 0 and fighter.side == 'left' or fighter.vector[0] < 0 and fighter.side == 'right')\
+                and not fighter.block and not fighter.ducked:
+            fighter.cur_anim = 'walk_f'
+
+        elif fighter.vector[0] != 0 and fighter.cur_anim != 'walk_b' and fighter.on_ground and\
+                (fighter.vector[0] < 0 and fighter.side == 'left' or fighter.vector[0] > 0 and fighter.side == 'right')\
+                and not fighter.block and not fighter.ducked:
+            fighter.cur_anim = 'walk_b'
+
+        elif fighter.vector[
+            0] == 0 and fighter.cur_anim != 'stand' and fighter.cur_anim != 'duck' and fighter.on_ground\
+                and not fighter.block and not fighter.attack:
+            fighter.cur_anim = 'stand'
+
+        elif fighter.vector[
+            0] == 0 and fighter.cur_anim != 'jump' and not fighter.on_ground\
+                and not fighter.block and not fighter.ducked:
+            fighter.cur_anim = 'jump'
+
+        elif fighter.vector[0] != 0 and fighter.cur_anim != 'move_jump' and not fighter.on_ground\
+                and not fighter.block and not fighter.ducked:
+            fighter.cur_anim = 'move_jump'
