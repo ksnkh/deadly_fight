@@ -7,7 +7,6 @@ from choose_fighter_host import ChooseFighterH
 from choose_fighter_client import ChooseFighterC
 from egg import Egg
 from connect_to_server import Connect
-from fight import Fight
 
 pygame.init()
 pygame.mixer.init()
