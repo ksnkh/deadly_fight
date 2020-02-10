@@ -1,6 +1,7 @@
 import pygame
 from load_image import load_image
 from change_fighter_position import change_position
+from turn_frame import turn_frame
 
 
 def set_char_anim(char, anim):
@@ -26,7 +27,7 @@ def set_char_anim(char, anim):
     else:
         t = char.pos_y + char.rect.height
         char.rect.height = char.frames[0].get_rect()[3]
-        change_position(char, [0, t - char.rect.height - char.pos_y])
+        change_position(char, [0, t - char.rect.height - char.pos_y], 'all')
 
 
     # NECESSARY EDITING

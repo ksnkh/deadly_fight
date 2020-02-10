@@ -85,8 +85,6 @@ class ChooseFighterC:
             self.your_char.fill((128, 128, 128))
             self.your_char.blit(pygame.transform.flip(self.heroes[self.chosen_button[1]][4], True, False), [2, 2])
 
-
-
         elif self.chosen_button[0] == 'b':
             if self.chosen_button[1] == 0:
                 self.client_socket.send(pickle.dumps(['exit']))
@@ -116,25 +114,23 @@ class ChooseFighterC:
         def receive(self):
             while True:
                 try:
-                    msg = self.client_socket.recv(BUFSIZE)
+                    msg = self.client_socket.recv(1024)
                     try:
                         info = pickle.loads(msg)
                         key = info[0]
                         if key == 'start fight':
-                            self.called_menu = 'start fight'
-                            self.info += info[1]
+                            self.called_menu = info[0]
+                            self.info += [self.client_socket] + info[1]
+                            print('sf', info[1])
 
                         elif key == 'not ready':
+                            for h in self.heroes:
+                                if h[2] == info[1]:
+                                    self.enemys_fighter = h[2]
+                                    self.enemy_char = pygame.Surface([240, 240])
+                                    self.enemy_char.fill((128, 128, 128))
+                                    self.enemy_char.blit(h[4], [2, 2])
 
-                            for f in info[1]:
-                                if f[0] == player_id:
-                                    continue
-                                else:
-                                    for h in self.heroes:
-                                        if h[2] == f[1]:
-                                            self.enemy_char = pygame.Surface([240, 240])
-                                            self.enemy_char.fill((128, 128, 128))
-                                            self.enemy_char.blit(h[4], [2, 2])
                         elif key == 'server is down':
                             self.called_menu = 'main'
 
@@ -143,9 +139,8 @@ class ChooseFighterC:
                 except OSError:  # Possibly client has left the chat.
                     break
 
-        HOST = self.ip
+        HOST = '192.168.1.153' #self.ip
         PORT = 33000  # input('Enter port: ')
-        BUFSIZE = 1024
         self.client_socket = socket(AF_INET, SOCK_STREAM)
         try:
             self.client_socket.connect((HOST, PORT))
@@ -155,11 +150,11 @@ class ChooseFighterC:
         receive_thread.start()
 
         player_id = str(random.randint(1, 1000000))
-        self.client_socket.send(bytes(f"{player_id} right", "utf8"))
+        self.client_socket.send(bytes(f"{player_id} client", "utf8"))
 
         running = True
         self.called_menu = None
-        self.info = [player_id]
+        self.info = []
         self.background = load_image(r"backgrounds\background.jpg")
         while running:
 

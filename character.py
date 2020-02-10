@@ -2,12 +2,14 @@ import pygame
 from subzero_animations_settings import subzero_move_animations, subzero_attack_animations
 from scorpion_animations_settings import scorpion_move_animations, scorpion_attack_animations
 from jonny_cage_animations_settings import jonny_cage_move_animations, jonny_cage_attack_animations
+from sonya_animations_settings import sonya_attack_animations, sonya_move_animations
+from lu_kang_animation_settings import liu_kang_attack_animations, liu_kang_move_animations
 from set_char_anim import set_char_anim
 from change_fighter_position import change_position
 
 
 class Character(pygame.sprite.Sprite):
-    def __init__(self, name, side, id, *groups):
+    def __init__(self, name, side, *groups):
         super().__init__(groups)
         self.name = name
         self.side = side
@@ -17,16 +19,22 @@ class Character(pygame.sprite.Sprite):
         elif self.name == 'Scorpion':
             self.animation_settings = scorpion_move_animations
             self.attack_animations = scorpion_attack_animations
-        elif self.name == 'Johny_Cage':
+        elif self.name == 'Johny Cage':
             self.animation_settings = jonny_cage_move_animations
             self.attack_animations = jonny_cage_attack_animations
+        elif self.name == 'Sonya':
+            self.animation_settings = sonya_move_animations
+            self.attack_animations = sonya_attack_animations
+        elif self.name == 'Liu Kang':
+            self.animation_settings = liu_kang_move_animations
+            self.attack_animations = liu_kang_attack_animations
 
         if self.side == 'left':
             self.pos_x = 100
-            self.pos_y = 140
+            self.pos_y = 240
         else:
             self.pos_x = 500
-            self.pos_y = 140
+            self.pos_y = 240
 
         self.actual_coords_x = self.pos_x + 450
         self.actual_coords_y = self.pos_y
@@ -51,9 +59,7 @@ class Character(pygame.sprite.Sprite):
         self.damage = 0
         self.getting_damage = False
         self.dead = False
-        self.id = id
-        change_position(self, self.vector)
-
+        change_position(self, self.vector, 'all')
 
     def set_anim(self, anim):
         set_char_anim(self, anim)

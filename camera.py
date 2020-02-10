@@ -20,4 +20,4 @@ class Camera:
                 shift = 1
             else:
                 shift = 0
-            change_position(obj, [shift, 0])
+            change_position(obj, [shift, 0], 'scr')

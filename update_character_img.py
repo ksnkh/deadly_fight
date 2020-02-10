@@ -21,8 +21,7 @@ def update_img(char, side, f=False):
             char.can_turn = True
             turn_frame(char, side)
             if char.cur_anim in ['trip', 'thrown']:
-                char.cur_anim = 'stand_up'
-                char.cur_frame = 0
+                set_char_anim(char, 'stand_up')
             else:
                 char.getting_damage = False
                 update_anim(char)
@@ -31,15 +30,17 @@ def update_img(char, side, f=False):
             char.cur_frame += 1
 
         char.frame_time = char.curent_animation_settings[2][char.cur_frame]
+    char.image = char.frames[char.cur_frame]
 
     if char.side == 'right':
         t = char.pos_x + char.rect.width
         char.rect.width = char.image.get_rect()[2]
-        change_position(char, [(t - char.rect.width) - char.pos_x, 0])
+        change_position(char, [(t - char.rect.width) - char.pos_x, 0], 'all')
 
     else:
         char.rect.width = char.image.get_rect()[2]
 
+    char.mask = pygame.mask.from_surface(char.image)
     char.damage = 0
     if char.curent_animation_settings[5]:
         if char.cur_frame in char.curent_animation_settings[5][0]:

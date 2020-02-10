@@ -6,45 +6,87 @@ from camera_focus import CameraFocus
 from game_cycle import game_cycle
 from helth_bar import HelthBar
 from attack_list import AttackExecution
-import random
+import pickle
+from threading import Thread
+from change_fighter_position import change_position
+from apply_damage import apply_damage
+from turn_frame import turn_frame
 
 size = width, height = 800, 600
 screen = pygame.display.set_mode(size)
 
 
 class Fight:
-    def __init__(self, map_name, fighter_side, your_char, enemy_char):
-        self.map_name = map_name
-        self.fighter_side = fighter_side
-        self.your_char = your_char
-        self.enemy_char = enemy_char
+    def __init__(self, data):
+        # data = [socket, [fighter name, fighter side, enemy fighter name, map]]
+        self.client_socket = data[0]
+
+        self.your_char = data[1][0]
+        self.fighter_side = data[1][1]
+        self.enemy_char = data[1][2]
+        self.map_name = data[1][3]
 
     def run(self):
+        def receive(self):
+            while True:
+                try:
+                    msg = self.client_socket.recv(1024)
+                    try:
+                        info = pickle.loads(msg)
+                        key = info[0]
+                        if key == 'player left':
+                            self.running = False
+
+                        elif key == 'update':
+                            change_position(self.enemy, [info[1] - self.enemy.actual_coords_x, info[2] - self.enemy.actual_coords_y], 'all')
+                            if self.enemy.cur_anim != info[3]:
+                                self.enemy.set_anim(info[3])
+                            self.enemy.helth = info[4]
+                            if info[6]:
+                                self.enemy.image = pygame.transform.flip(self.enemy.frames[info[5]], True, False)
+                            else:
+                                self.enemy.image = self.enemy.frames[info[5]]
+                            self.enemy.side = info[7]
+                            if self.enemy == 'right':
+                                t = self.enemy.pos_x + self.enemy.rect.width
+                                self.enemy.rect.width = self.enemy.image.get_rect()[2]
+                                change_position(self.enemy, [(t - self.enemy.rect.width) - self.enemy.pos_x, 0], 'all')
+
+                        elif key == 'get damage':
+                            apply_damage(self.char, info[1])
+
+                    except pickle.UnpicklingError:
+                        continue
+                except OSError:  # Possibly client has left the chat.
+                    break
+        self.screen = screen
+        self.receive_thread = Thread(target=receive, args=(self, ))
+        self.receive_thread.start()
         # CREATING SPRITE GROUPS
-        all_sprites = pygame.sprite.Group()
-        fighters = pygame.sprite.Group()
-        bground = pygame.sprite.Group()
-        cfg = pygame.sprite.Group()
-        helth_bars = pygame.sprite.Group()
-        alg = pygame.sprite.Group()
+        self.all_sprites = pygame.sprite.Group()
+        self.fighters = pygame.sprite.Group()
+        self.bground = pygame.sprite.Group()
+        self.cfg = pygame.sprite.Group()
+        self.helth_bars = pygame.sprite.Group()
+        self.alg = pygame.sprite.Group()
 
         # CREATING SPRITES
-        bgr = Background(f"maps/{self.map_name}.png", all_sprites, bground)
-        cf = CameraFocus(cfg)
+        self.bgr = Background(f"maps/{self.map_name}.png", self.all_sprites, self.bground)
+        self.cf = CameraFocus(self.cfg)
         if self.fighter_side == 'right':
-            enemy = Character(self.enemy_char, 'left', random.randint(0, 1000000), fighters, all_sprites)
-            char = Character(self.your_char, 'right', random.randint(0, 1000000), fighters, all_sprites)
+            self.enemy = Character(self.enemy_char, 'left', self.fighters, self.all_sprites)
+            self.char = Character(self.your_char, 'right', self.fighters, self.all_sprites)
         else:
-            char = Character(self.your_char, 'left', random.randint(0, 1000000), fighters, all_sprites)
-            enemy = Character(self.enemy_char, 'right', random.randint(0, 1000000), fighters, all_sprites)
-        chb = HelthBar(char, helth_bars)
-        ehb = HelthBar(enemy, helth_bars)
-        camera = Camera(cf)
-        al = AttackExecution(self.your_char, alg)
+            self.char = Character(self.your_char, 'left', self.fighters, self.all_sprites)
+            self.enemy = Character(self.enemy_char, 'right', self.fighters, self.all_sprites)
+        self.chb = HelthBar(self.char, self.helth_bars)
+        self.ehb = HelthBar(self.enemy, self.helth_bars)
+        self.camera = Camera(self.cf)
+        self.al = AttackExecution(self.your_char, self.alg)
+        self.running = True
 
         # game cycle
-        game_cycle(screen, char, enemy, camera, cf, chb, ehb, alg, all_sprites, cfg,
-                   fighters, bground, helth_bars)
+        game_cycle(self)
 
         screen.fill(pygame.Color('black'))
         return 'main'

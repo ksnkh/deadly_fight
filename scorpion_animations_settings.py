@@ -4,7 +4,7 @@
 # loop,
 # if char can turn during animation,
 # frame with punch and damage ]
-scorpion_move_animations = {'stand': [7, [58] * 6 + [49], [1] * 7, [0, 6], True, False],
+scorpion_move_animations = {'stand': [7, [60, 58, 59, 57, 58, 59, 51], [1] * 7, [0, 6], True, False],
                             'walk_f': [9, [58, 57, 58, 57, 57, 58, 58, 67, 58], [1] * 9, [0, 8], True, False],
                             'walk_b': [9, [58, 57, 58, 57, 57, 58, 58, 67, 58], [1] * 9, [0, 8], True, False],
                             'jump': [3, [54, 56, 45], [3, 3, 5], [0, 2], False, False],
