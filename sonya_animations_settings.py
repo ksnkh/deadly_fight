@@ -4,7 +4,7 @@
 # loop,
 # if char can turn during animation,
 # frame with punch and damage ]
-subzero_move_animations = {'stand': [7, [45, 48, 47, 46, 46, 46, 50], [1] * 7, [0, 11], True, False],
+sonya_move_animations = {'stand': [7, [45, 48, 47, 46, 46, 46, 50], [1] * 7, [0, 11], True, False],
                            'walk_f': [9, [60, 43, 43, 45, 45, 47, 44, 49, 60], [1] * 9, [0, 8], True, False],
                            'walk_b': [9, [60, 43, 43, 45, 45, 47, 44, 49, 60], [1] * 9, [0, 8], True, False],
                            'jump': [3, [54, 56, 45], [3, 3, 5], [0, 2], False, False],
@@ -36,5 +36,5 @@ subzero_move_animations = {'stand': [7, [45, 48, 47, 46, 46, 46, 50], [1] * 7, [
 
                            'dead': [7, [50] * 7, [2] * 7, [0, 6], False, False]}
 
-subzero_attack_animations = ['low_punch', 'high_punch', 'low_kick', 'high_kick', 'uppercut', 'sweep_kick', 'roundhouse',
+sonya_attack_animations = ['low_punch', 'high_punch', 'low_kick', 'high_kick', 'uppercut', 'sweep_kick', 'roundhouse',
                              'throw', 'air_kick']
