@@ -7,6 +7,7 @@ from choose_fighter_host import ChooseFighterH
 from choose_fighter_client import ChooseFighterC
 from egg import Egg
 from connect_to_server import Connect
+from fight import Fight
 
 pygame.init()
 pygame.mixer.init()
@@ -19,9 +20,6 @@ fps = 80
 clock = pygame.time.Clock()
 
 settings = {'music': 1, 'sound': 1}
-hero_creator = 'джонни'
-hero_guest = 'джонни'
-main_map = ''
 
 setting_music = ['Музыка: вкл',
                  'Звуки: вкл']

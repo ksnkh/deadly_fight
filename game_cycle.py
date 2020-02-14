@@ -78,16 +78,19 @@ def game_cycle(fight_settings):
         update_pos_and_anim(fight_settings.char, fight_settings.enemy, True)
         if img_change == 8:
             if fight_settings.char.pos_x <= fight_settings.enemy.pos_x:
-                update_img(fight_settings.char, 'left', True)
+                update_img(fight_settings.char, fight_settings.enemy, 'left', fight_settings.cf, True)
             else:
-                update_img(fight_settings.char, 'right', True)
+                update_img(fight_settings.char, fight_settings.enemy, 'right', fight_settings.cf, True)
             img_change = 0
         else:
             img_change += 1
         fight_settings.client_socket.send(pickle.dumps(['update', fight_settings.char.actual_coords_x,
                                                         fight_settings.char.actual_coords_y, fight_settings.char.cur_anim,
                                                         fight_settings.char.helth, fight_settings.char.cur_frame,
-                                                        fight_settings.char.turn, fight_settings.char.side]))
+                                                        fight_settings.char.turn, fight_settings.char.side,
+                                                        fight_settings.char.rect.width, fight_settings.char.rect.height]))
+        if fight_settings.char.side == 'right':
+            print(fight_settings.char.actual_coords_x, fight_settings.char.actual_coords_x + fight_settings.char.rect.width)
         if pygame.sprite.collide_mask(fight_settings.char, fight_settings.enemy):
             effect = collision(fight_settings.char, fight_settings.enemy)
             if effect is not None:
@@ -95,17 +98,19 @@ def game_cycle(fight_settings):
 
         for hb in fight_settings.helth_bars:
             hb.update_helth_bar()
-        print(fight_settings.char.cur_anim, fight_settings.char.cur_frame)
 
         # camera update
+        if fight_settings.char.side == 'right':
+            fight_settings.cf.update(fight_settings.char.actual_coords_x + fight_settings.char.rect.width,
+                                     fight_settings.enemy.actual_coords_x)
+        else:
+            fight_settings.cf.update(fight_settings.char.actual_coords_x,
+                                     fight_settings.enemy.actual_coords_x + fight_settings.enemy.rect.width)
         for i in range(3):
-            if fight_settings.char.side == 'right':
-                fight_settings.cf.update(fight_settings.char.actual_coords_x + fight_settings.char.rect.width, fight_settings.enemy.actual_coords_x)
-            else:
-                fight_settings.cf.update(fight_settings.char.actual_coords_x, fight_settings.enemy.actual_coords_x + fight_settings.enemy.rect.width)
             for s in fight_settings.all_sprites:
                 fight_settings.camera.apply(s)
             fight_settings.camera.apply(fight_settings.cf)
+
         # drawing
         fight_settings.screen.fill(pygame.Color("black"))
         fight_settings.bground.draw(fight_settings.screen)

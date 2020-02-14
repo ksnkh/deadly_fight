@@ -29,6 +29,11 @@ def set_char_anim(char, anim):
         char.rect.height = char.frames[0].get_rect()[3]
         change_position(char, [0, t - char.rect.height - char.pos_y], 'all')
 
+    if char.side == 'right':
+        t = char.actual_coords_x + char.rect.width
+        char.rect.size = char.frames[0].get_size()
+        change_position(char, [(t - char.rect.width) - char.actual_coords_x, 0], 'all')
+
 
     # NECESSARY EDITING
     if anim == 'duck':

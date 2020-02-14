@@ -22,3 +22,5 @@ def jump(fighter):
             fighter.vector[1] -= 28
         fighter.vector[0] *= 2
         fighter.on_ground = 0
+    print('jump')
+    print('----------------------------------------------------------')

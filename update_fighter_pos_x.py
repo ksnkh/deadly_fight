@@ -13,8 +13,8 @@ def update_x(fighter, enemy, f=False):
         if fighter.actual_coords_x > enemy.actual_coords_x and fighter.actual_coords_x < enemy.actual_coords_x + enemy.rect.width * 0.75:
             dif = [(enemy.actual_coords_x + enemy.rect.width * 0.75) - fighter.actual_coords_x, 0]
             fighter.vector[0] = 0
-        elif fighter.actual_coords_x < enemy.actual_coords_x and fighter.actual_coords_x > enemy.actual_coords_x - enemy.rect.width * 0.75:
-            dif = [(enemy.actual_coords_x - enemy.rect.width * 0.75) - fighter.actual_coords_x, 0]
+        elif fighter.actual_coords_x < enemy.actual_coords_x and fighter.actual_coords_x > enemy.actual_coords_x + enemy.rect.width * 0.25:
+            dif = [(enemy.actual_coords_x + enemy.rect.width * 0.25) - fighter.actual_coords_x, 0]
             fighter.vector[0] = 0
         else:
             dif = [0, 0]

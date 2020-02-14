@@ -148,26 +148,22 @@ class ChooseFighterH:
         def receive(self):
             while True:
                 try:
-                    msg = self.client_socket.recv(BUFSIZE)
+                    msg = self.client_socket.recv(1024)
                     try:
                         info = pickle.loads(msg)
                         key = info[0]
                         if key == 'start fight':
                             self.called_menu = info[0]
-                            self.info += info[1]
+                            self.info += [self.client_socket] + info[1]
+                            print('sf', info[1])
 
                         elif key == 'not ready':
-
-                            for f in info[1]:
-                                if f[0] == self.player_id:
-                                    continue
-                                elif f[1] != self.enemys_fighter:
-                                    for h in self.heroes:
-                                        if h[2] == f[1]:
-                                            self.enemys_fighter = h[2]
-                                            self.enemy_char = pygame.Surface([240, 240])
-                                            self.enemy_char.fill((128, 128, 128))
-                                            self.enemy_char.blit(pygame.transform.flip(h[4], True, False), [2, 2])
+                            for h in self.heroes:
+                                if h[2] == info[1] and h[2] != self.enemys_fighter:
+                                    self.enemys_fighter = h[2]
+                                    self.enemy_char = pygame.Surface([240, 240])
+                                    self.enemy_char.fill((128, 128, 128))
+                                    self.enemy_char.blit(pygame.transform.flip(h[4], True, False), [2, 2])
 
                         elif key == 'enemy disconnected':
                             self.enemys_fighter = None
@@ -184,18 +180,17 @@ class ChooseFighterH:
 
         HOST = "192.168.1.153"  # input('Enter host: ')
         PORT = 33000  # input('Enter port: ')
-        BUFSIZE = 1024
         self.client_socket = socket(AF_INET, SOCK_STREAM)
         self.client_socket.connect((HOST, PORT))
         self.receive_thread = Thread(target=receive, args=(self, ))
         self.receive_thread.start()
 
         self.player_id = str(random.randint(1, 1000000))
-        self.client_socket.send(bytes(f"{self.player_id} left", "utf8"))
+        self.client_socket.send(bytes(f"{self.player_id} host", "utf8"))
 
         running = True
         self.called_menu = None
-        self.info = [self.player_id]
+        self.info = []
         self.background = load_image(r"backgrounds\background.jpg")
         while running:
 

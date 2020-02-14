@@ -5,7 +5,7 @@ from turn_frame import turn_frame
 from set_char_anim import set_char_anim
 
 
-def update_img(char, side, f=False):
+def update_img(char, enemy, side, cf, f=False):
     char.frame_time -= 1
     if char.frame_time == 0:
 
@@ -33,12 +33,12 @@ def update_img(char, side, f=False):
     char.image = char.frames[char.cur_frame]
 
     if char.side == 'right':
-        t = char.pos_x + char.rect.width
-        char.rect.width = char.image.get_rect()[2]
-        change_position(char, [(t - char.rect.width) - char.pos_x, 0], 'all')
+        t = char.actual_coords_x + char.rect.width
+        char.rect.size = char.image.get_size()
+        change_position(char, [(t - char.rect.width) - char.actual_coords_x, 0], 'all')
 
     else:
-        char.rect.width = char.image.get_rect()[2]
+        char.rect.size = char.image.get_size()
 
     char.mask = pygame.mask.from_surface(char.image)
     char.damage = 0
@@ -47,3 +47,11 @@ def update_img(char, side, f=False):
             char.damage = char.curent_animation_settings[5][2]
 
     turn_frame(char, side)
+
+    print(char.side)
+    if char.side == 'right':
+        cf.update(char.actual_coords_x + char.rect.width,
+                                 enemy.actual_coords_x)
+    else:
+        cf.update(char.actual_coords_x,
+                                 enemy.actual_coords_x + enemy.rect.width)

@@ -42,15 +42,24 @@ class Fight:
                             if self.enemy.cur_anim != info[3]:
                                 self.enemy.set_anim(info[3])
                             self.enemy.helth = info[4]
+                            self.enemy.side = info[7]
                             if info[6]:
                                 self.enemy.image = pygame.transform.flip(self.enemy.frames[info[5]], True, False)
                             else:
                                 self.enemy.image = self.enemy.frames[info[5]]
-                            self.enemy.side = info[7]
-                            if self.enemy == 'right':
-                                t = self.enemy.pos_x + self.enemy.rect.width
-                                self.enemy.rect.width = self.enemy.image.get_rect()[2]
-                                change_position(self.enemy, [(t - self.enemy.rect.width) - self.enemy.pos_x, 0], 'all')
+
+                            self.enemy.rect.width = info[8]
+                            self.enemy.rect.height = info[9]
+
+                            if self.char.side == 'right':
+                                self.cf.update(
+                                    self.char.actual_coords_x + self.char.rect.width,
+                                    self.enemy.actual_coords_x)
+                            else:
+                                self.cf.update(self.char.actual_coords_x,
+                                                         self.enemy.actual_coords_x + self.enemy.rect.width)
+                            if self.enemy.side == 'right':
+                                print(self.enemy.actual_coords_x, self.enemy.actual_coords_x + self.enemy.rect.width)
 
                         elif key == 'get damage':
                             apply_damage(self.char, info[1])
