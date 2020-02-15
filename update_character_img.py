@@ -14,6 +14,8 @@ def update_img(char, enemy, side, cf, f=False):
                 char.cur_frame = char.curent_animation_settings[3][0] - 1
 
         if char.cur_frame == len(char.curent_animation_settings[2]) - 1:
+            if char.cur_anim == 'weak_hit':
+                print('---------------------------------')
             char.cur_anim = ''
             char.attack = False
             char.hit = False
