@@ -89,8 +89,6 @@ def game_cycle(fight_settings):
                                                         fight_settings.char.helth, fight_settings.char.cur_frame,
                                                         fight_settings.char.turn, fight_settings.char.side,
                                                         fight_settings.char.rect.width, fight_settings.char.rect.height]))
-        if fight_settings.char.side == 'right':
-            print(fight_settings.char.actual_coords_x, fight_settings.char.actual_coords_x + fight_settings.char.rect.width)
         if pygame.sprite.collide_mask(fight_settings.char, fight_settings.enemy):
             effect = collision(fight_settings.char, fight_settings.enemy)
             if effect is not None:

@@ -58,8 +58,6 @@ class Fight:
                             else:
                                 self.cf.update(self.char.actual_coords_x,
                                                          self.enemy.actual_coords_x + self.enemy.rect.width)
-                            if self.enemy.side == 'right':
-                                print(self.enemy.actual_coords_x, self.enemy.actual_coords_x + self.enemy.rect.width)
 
                         elif key == 'get damage':
                             apply_damage(self.char, info[1])

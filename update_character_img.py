@@ -48,7 +48,6 @@ def update_img(char, enemy, side, cf, f=False):
 
     turn_frame(char, side)
 
-    print(char.side)
     if char.side == 'right':
         cf.update(char.actual_coords_x + char.rect.width,
                                  enemy.actual_coords_x)
