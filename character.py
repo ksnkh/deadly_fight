@@ -1,7 +1,7 @@
 import pygame
 from subzero_animations_settings import subzero_move_animations, subzero_attack_animations
 from scorpion_animations_settings import scorpion_move_animations, scorpion_attack_animations
-from jonny_cage_animations_settings import jonny_cage_move_animations, jonny_cage_attack_animations
+from jonny_cage_animations_settings import johny_cage_move_animations, johny_cage_attack_animations
 from sonya_animations_settings import sonya_attack_animations, sonya_move_animations
 from lu_kang_animation_settings import liu_kang_attack_animations, liu_kang_move_animations
 from set_char_anim import set_char_anim
@@ -20,8 +20,8 @@ class Character(pygame.sprite.Sprite):
             self.animation_settings = scorpion_move_animations
             self.attack_animations = scorpion_attack_animations
         elif self.name == 'Johny Cage':
-            self.animation_settings = jonny_cage_move_animations
-            self.attack_animations = jonny_cage_attack_animations
+            self.animation_settings = johny_cage_move_animations
+            self.attack_animations = johny_cage_attack_animations
         elif self.name == 'Sonya':
             self.animation_settings = sonya_move_animations
             self.attack_animations = sonya_attack_animations

@@ -21,7 +21,12 @@ clock = pygame.time.Clock()
 def game_cycle(fight_settings):
     img_change = 0
     show_attack_list = False
+    endgame = False
+    endgame_timer = 0
+    debug = 0
     while fight_settings.running:
+        print(debug)
+        debug += 1
         for event in pygame.event.get():
             if event.type == fall:
                 for c in fight_settings.fighters:
@@ -84,11 +89,14 @@ def game_cycle(fight_settings):
             img_change = 0
         else:
             img_change += 1
-        fight_settings.client_socket.send(pickle.dumps(['update', fight_settings.char.actual_coords_x,
+        try:
+            fight_settings.client_socket.send(pickle.dumps(['update', fight_settings.char.actual_coords_x,
                                                         fight_settings.char.actual_coords_y, fight_settings.char.cur_anim,
                                                         fight_settings.char.helth, fight_settings.char.cur_frame,
                                                         fight_settings.char.turn, fight_settings.char.side,
                                                         fight_settings.char.rect.width, fight_settings.char.rect.height]))
+        except ConnectionResetError:
+            break
         if pygame.sprite.collide_mask(fight_settings.char, fight_settings.enemy):
             effect = collision(fight_settings.char, fight_settings.enemy)
             if effect is not None:
@@ -109,6 +117,12 @@ def game_cycle(fight_settings):
                 fight_settings.camera.apply(s)
             fight_settings.camera.apply(fight_settings.cf)
 
+        if fight_settings.char.dead or fight_settings.enemy.dead:
+            endgame = True
+
+        if endgame_timer == 100:
+            fight_settings.client_socket.send(pickle.dumps(['end game']))
+
         # drawing
         fight_settings.screen.fill(pygame.Color("black"))
         fight_settings.bground.draw(fight_settings.screen)
@@ -121,5 +135,18 @@ def game_cycle(fight_settings):
         fight_settings.helth_bars.draw(fight_settings.screen)
         if show_attack_list:
             fight_settings.alg.draw(fight_settings.screen)
+        if endgame:
+            res = pygame.Surface([800, 600])
+            res.fill(pygame.Color("black"))
+            res.set_alpha(180)
+            font = pygame.font.SysFont('RomanD', 100)
+            if fight_settings.char.dead:
+                text = font.render('Поражение', 0, (200, 128, 128))
+            elif fight_settings.enemy.dead:
+                text = font.render('Победа', 0, (128, 200, 128))
+            res.blit(text, [250, 200])
+            fight_settings.screen.blit(res, [0, 0])
+            endgame_timer += 1
         clock.tick(fps)
         pygame.display.flip()
+    return

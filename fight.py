@@ -29,12 +29,14 @@ class Fight:
     def run(self):
         def receive(self):
             while True:
+                print(self.running)
                 try:
                     msg = self.client_socket.recv(1024)
                     try:
                         info = pickle.loads(msg)
                         key = info[0]
-                        if key == 'player left':
+                        if key == 'end game':
+                            print('-----------------------------------')
                             self.running = False
 
                         elif key == 'update':
@@ -67,8 +69,7 @@ class Fight:
                 except OSError:  # Possibly client has left the chat.
                     break
         self.screen = screen
-        self.receive_thread = Thread(target=receive, args=(self, ))
-        self.receive_thread.start()
+
         # CREATING SPRITE GROUPS
         self.all_sprites = pygame.sprite.Group()
         self.fighters = pygame.sprite.Group()
@@ -92,8 +93,11 @@ class Fight:
         self.al = AttackExecution(self.your_char, self.alg)
         self.running = True
 
+        self.receive_thread = Thread(target=receive, args=(self, ))
+        self.receive_thread.start()
+
         # game cycle
         game_cycle(self)
-
+        print('game endedddddddddddd')
         screen.fill(pygame.Color('black'))
-        return 'main'
+        return ['main']

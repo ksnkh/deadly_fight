@@ -12,7 +12,7 @@ subzero_move_animations = {'stand': [12, [51] * 12, [1] * 12, [0, 11], True, Fal
                            'duck': [3, [52] * 3, [1] * 5, [2, 2], False, False],
                            'block': [1, [50], [1], [0, 0], False, False],
 
-                           'high_punch': [3, [60, 60, 71], [1, 1, 5], [], False, [[2], 'weak_hit', 30, [4, 0]]],
+                           'high_punch': [3, [60, 60, 71], [1, 1, 5], [], False, [[2], 'weak_hit', 300, [4, 0]]],
                            'low_punch': [2, [60, 70], [1, 5], [], False, [[1], 'weak_hit', 30, [4, 0]]],
                            'high_kick': [6, [55, 56, 45, 65, 88, 64], [1, 1, 1, 1, 3, 1], [], False, [[4], 'weak_hit', 50, [6, 0]]],
                            'low_kick': [6, [55, 56, 45, 63, 92, 64], [1, 1, 1, 1, 3, 1], [], False, [[4], 'weak_hit', 50, [6, 0]]],

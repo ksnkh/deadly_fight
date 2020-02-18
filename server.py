@@ -91,15 +91,11 @@ def handle_client(client):  # Takes client socket as argument.
     while not STOP_THREADS:
         msg = client.recv(1024)
         s = pickle.loads(msg)
-        if s[0] == 'exit':
-            send_info_to_enemy(['player left'])
+        if s[0] == 'end game':
+            broadcast(['end game'])
             STOP_THREADS = True
-
         else:
             send_info_to_enemy(s)
-
-    return
-
 
 def execute():
     os.system("taskkill /F /PID " + str(os.getppid()))
