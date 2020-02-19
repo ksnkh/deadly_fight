@@ -5,21 +5,24 @@ from turn_frame import turn_frame
 
 
 def set_char_anim(char, anim):
-    char.cur_anim = anim
-    char.curent_animation_settings = char.animation_settings[anim]
-    char.can_turn = char.curent_animation_settings[4]
-    char.frame_time = char.curent_animation_settings[2][0]
-    char.frames = []
-    char.cur_frame = 0
+    new_frames = []
+    new_anim_settings = char.animation_settings[anim]
 
     sheet = load_image(f"animations/{char.name}/{anim}.png", -1)
     height = sheet.get_rect().size[1]
-    for i in range(char.curent_animation_settings[0]):
-        frame_location = (sum(char.curent_animation_settings[1][:i]), 0)
-        frame = sheet.subsurface(pygame.Rect(frame_location, [char.curent_animation_settings[1][i], height]))
+    for i in range(new_anim_settings[0]):
+        frame_location = (sum(new_anim_settings[1][:i]), 0)
+        frame = sheet.subsurface(pygame.Rect(frame_location, [new_anim_settings[1][i], height]))
         color_key = frame.get_at((0, 0))
         frame.set_colorkey(color_key)
-        char.frames.append(pygame.transform.scale(frame, (char.curent_animation_settings[1][i] * 4, height * 3)))
+        new_frames.append(pygame.transform.scale(frame, (new_anim_settings[1][i] * 4, height * 3)))
+
+    char.cur_anim = anim
+    char.curent_animation_settings = new_anim_settings
+    char.can_turn = char.curent_animation_settings[4]
+    char.frame_time = char.curent_animation_settings[2][0]
+    char.frames = new_frames.copy()
+    char.cur_frame = 0
 
     if char.rect is None:
         t = 540

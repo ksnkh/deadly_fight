@@ -24,9 +24,8 @@ def game_cycle(fight_settings):
     endgame = False
     endgame_timer = 0
     debug = 0
+    msg_num = 0
     while fight_settings.running:
-        print(debug)
-        debug += 1
         for event in pygame.event.get():
             if event.type == fall:
                 for c in fight_settings.fighters:
@@ -74,7 +73,8 @@ def game_cycle(fight_settings):
             else:
                 fight_settings.char.ducked = False
 
-            if pygame.key.get_pressed()[pygame.K_SPACE] and fight_settings.char.on_ground and not fight_settings.char.ducked:
+            if pygame.key.get_pressed()[
+                pygame.K_SPACE] and fight_settings.char.on_ground and not fight_settings.char.ducked:
                 fight_settings.char.block = True
             else:
                 fight_settings.char.block = False
@@ -89,18 +89,21 @@ def game_cycle(fight_settings):
             img_change = 0
         else:
             img_change += 1
-        try:
-            fight_settings.client_socket.send(pickle.dumps(['update', fight_settings.char.actual_coords_x,
-                                                        fight_settings.char.actual_coords_y, fight_settings.char.cur_anim,
-                                                        fight_settings.char.helth, fight_settings.char.cur_frame,
-                                                        fight_settings.char.turn, fight_settings.char.side,
-                                                        fight_settings.char.rect.width, fight_settings.char.rect.height]))
-        except ConnectionResetError:
-            break
-        if pygame.sprite.collide_mask(fight_settings.char, fight_settings.enemy):
+        msg = ['update', fight_settings.char.actual_coords_x,
+               fight_settings.char.actual_coords_y, fight_settings.char.cur_anim,
+               fight_settings.char.helth, fight_settings.char.cur_frame,
+               fight_settings.char.turn, fight_settings.char.side,
+               fight_settings.char.rect.width, fight_settings.char.rect.height]
+        if pygame.sprite.collide_rect(fight_settings.char, fight_settings.enemy):
             effect = collision(fight_settings.char, fight_settings.enemy)
             if effect is not None:
-                fight_settings.client_socket.send(pickle.dumps(['get damage', effect]))
+                msg[0] += ', hit'
+                msg.append(effect)
+        try:
+            fight_settings.client_socket.send(pickle.dumps(msg))
+
+        except ConnectionResetError:
+            break
 
         for hb in fight_settings.helth_bars:
             hb.update_helth_bar()

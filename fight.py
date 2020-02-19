@@ -29,17 +29,15 @@ class Fight:
     def run(self):
         def receive(self):
             while True:
-                print(self.running)
                 try:
                     msg = self.client_socket.recv(1024)
                     try:
                         info = pickle.loads(msg)
                         key = info[0]
+                        print(info)
                         if key == 'end game':
-                            print('-----------------------------------')
                             self.running = False
-
-                        elif key == 'update':
+                        else:
                             change_position(self.enemy, [info[1] - self.enemy.actual_coords_x, info[2] - self.enemy.actual_coords_y], 'all')
                             if self.enemy.cur_anim != info[3]:
                                 self.enemy.set_anim(info[3])
@@ -61,10 +59,12 @@ class Fight:
                                 self.cf.update(self.char.actual_coords_x,
                                                          self.enemy.actual_coords_x + self.enemy.rect.width)
 
-                        elif key == 'get damage':
-                            apply_damage(self.char, info[1])
+                            if 'hit' in key:
+                                apply_damage(self.char, info[10])
+                                self.client_socket.send(pickle.dumps(['geting damage']))
 
                     except pickle.UnpicklingError:
+                        print('unpikling error')
                         continue
                 except OSError:  # Possibly client has left the chat.
                     break

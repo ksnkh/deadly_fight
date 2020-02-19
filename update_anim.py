@@ -61,7 +61,6 @@ def update_anim(fighter):
         elif fighter.vector[
             0] == 0 and fighter.cur_anim != 'stand' and fighter.cur_anim != 'duck' and fighter.on_ground\
                 and not fighter.block and not fighter.attack:
-            print('stand')
             fighter.set_anim('stand')
 
         elif fighter.vector[

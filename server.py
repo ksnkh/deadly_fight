@@ -51,6 +51,7 @@ def handle_client(client):  # Takes client socket as argument.
         elif key == 'start fight':
             return [player.fighter_name, player.side]
 
+
     def start_fight():
         global GAME_IS_ON
         GAME_IS_ON = True
@@ -87,15 +88,32 @@ def handle_client(client):  # Takes client socket as argument.
             else:
                 send_info_to_enemy(['not ready'] + get_char_info(player, 'update lobby'))
 
+
     # GAME CYCLE
     while not STOP_THREADS:
         msg = client.recv(1024)
         s = pickle.loads(msg)
+
         if s[0] == 'end game':
             broadcast(['end game'])
             STOP_THREADS = True
+        elif s[0] == 'exit':
+            send_info_to_enemy(['end game'])
+            STOP_THREADS = True
+        elif s[0] == 'geting damage':
+            if status == 'host':
+                CLIENT_PLAYER.attack = []
+            elif status == 'client':
+                HOST_PLAYER.attack = []
         else:
+            if 'hit' in s[0]:
+                player.attack = s[-1]
+            elif player.attack != []:
+                s.append(player.attack.copy())
+                s[0] += ' hit'
+
             send_info_to_enemy(s)
+
 
 def execute():
     os.system("taskkill /F /PID " + str(os.getppid()))
@@ -112,6 +130,7 @@ class Player:
             self.side = 'left'
         else:
             self.side = 'right'
+        self.attack = []
 
 
 HOST_PLAYER = None
