@@ -101,6 +101,7 @@ def game_cycle(fight_settings):
                 msg.append(effect)
         try:
             fight_settings.client_socket.send(pickle.dumps(msg))
+            print(fight_settings.char.actual_coords_x, fight_settings.char.pos_x, fight_settings.enemy.actual_coords_x, fight_settings.enemy.pos_x, fight_settings.cf.pos_x)
 
         except ConnectionResetError:
             break
@@ -110,11 +111,11 @@ def game_cycle(fight_settings):
 
         # camera update
         if fight_settings.char.side == 'right':
-            fight_settings.cf.update(fight_settings.char.actual_coords_x + fight_settings.char.rect.width,
-                                     fight_settings.enemy.actual_coords_x)
+            fight_settings.cf.update(fight_settings.char.pos_x + fight_settings.char.rect.width,
+                                     fight_settings.enemy.pos_x)
         else:
-            fight_settings.cf.update(fight_settings.char.actual_coords_x,
-                                     fight_settings.enemy.actual_coords_x + fight_settings.enemy.rect.width)
+            fight_settings.cf.update(fight_settings.char.pos_x,
+                                     fight_settings.enemy.pos_x + fight_settings.enemy.rect.width)
         for i in range(3):
             for s in fight_settings.all_sprites:
                 fight_settings.camera.apply(s)
@@ -123,7 +124,7 @@ def game_cycle(fight_settings):
         if fight_settings.char.dead or fight_settings.enemy.dead:
             endgame = True
 
-        if endgame_timer == 100:
+        if endgame_timer == 150:
             fight_settings.client_socket.send(pickle.dumps(['end game']))
 
         # drawing

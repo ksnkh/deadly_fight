@@ -1,7 +1,6 @@
 import pygame
 from load_image import load_image
 from change_fighter_position import change_position
-from turn_frame import turn_frame
 
 
 def set_char_anim(char, anim):
@@ -53,6 +52,15 @@ def set_char_anim(char, anim):
             char.vector[0] = 10
         else:
             char.vector[0] = -10
+
+    if anim == 'teleport':
+        if char.side == 'left':
+            dif = 900 - char.pos_x
+            char.vector[0] = -10
+        else:
+            dif = (-100 - char.rect.width) - char.pos_x
+            char.vector[0] = 10
+        change_position(char, [dif, -200], 'all')
 
 
     if char.cur_anim != 'stand':

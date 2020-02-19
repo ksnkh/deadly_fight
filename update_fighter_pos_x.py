@@ -16,7 +16,7 @@ def update_x(fighter, enemy, f=False):
             dif = [(enemy.actual_coords_x + enemy.rect.width - 200) - (fighter.actual_coords_x + 170), 0]
         else:
             dif = [0, 0]
-        if fighter.vector[0] != 0:
+        if fighter.vector[0] != 0 and fighter.cur_anim != 'teleport':
             change_position(fighter, dif, 'all')
 
     # SCREEN BORDER COLLISION
@@ -26,7 +26,7 @@ def update_x(fighter, enemy, f=False):
         dif = [800 - (fighter.pos_x + fighter.rect.width), 0]
     else:
         dif = [0, 0]
-    if fighter.vector[0] != 0:
+    if fighter.vector[0] != 0 and fighter.cur_anim != 'teleport':
         change_position(fighter, dif, 'all')
 
 

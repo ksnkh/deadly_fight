@@ -34,7 +34,6 @@ class Fight:
                     try:
                         info = pickle.loads(msg)
                         key = info[0]
-                        print(info)
                         if key == 'end game':
                             self.running = False
                         else:

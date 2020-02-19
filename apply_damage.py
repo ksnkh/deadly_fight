@@ -2,6 +2,8 @@ from set_char_anim import set_char_anim
 
 
 def apply_damage(char, effect):
+    if char.getting_damage:
+        return
     if not char.block:
         char.getting_damage = True
         set_char_anim(char, effect[1])
