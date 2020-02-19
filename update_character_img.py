@@ -14,8 +14,6 @@ def update_img(char, enemy, side, cf, f=False):
                 char.cur_frame = char.curent_animation_settings[3][0] - 1
 
         if char.cur_frame == len(char.curent_animation_settings[2]) - 1:
-            if char.cur_anim == 'weak_hit':
-                print('---------------------------------')
             char.cur_anim = ''
             char.attack = False
             char.hit = False
@@ -56,3 +54,22 @@ def update_img(char, enemy, side, cf, f=False):
     else:
         cf.update(char.actual_coords_x,
                                  enemy.actual_coords_x + enemy.rect.width)
+
+    # NECESSARY EDITING
+    if char.cur_anim == 'leg_throw':
+        if char.cur_frame <= 5:
+            char.vector[0] = 3
+        elif char.cur_frame > 5:
+            char.vector[0] = -3
+        if char.side == 'right':
+            char.vector[0] *= -1
+
+    if char.cur_anim == 'throw' and char.cur_frame == 3 and not char.hit:
+        char.cur_anim = ''
+        char.attack = False
+        char.hit = False
+        char.vector = [0, 0]
+        char.can_turn = True
+        turn_frame(char, side)
+        char.getting_damage = False
+        update_anim(char)

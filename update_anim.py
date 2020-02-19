@@ -35,11 +35,15 @@ def update_anim(fighter):
 
         if fighter.attack == 'low_kick' and fighter.cur_anim != 'low_kick':
             if fighter.previos_moves:
+                if len(fighter.previos_moves) >= 2:
+                    if fighter.previos_moves[-2][0] == 'duck' and fighter.previos_moves[-1][0] == 'walk_f' \
+                            and fighter.cur_anim != 'leg_throw' and fighter.name == 'Sonya':
+                        fighter.set_anim('leg_throw')
                 if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'sweep_kick':
                     fighter.set_anim('sweep_kick')
             if not fighter.on_ground and fighter.cur_anim != 'air_kick' and fighter.cur_anim != 'sweep_kick':
                 fighter.set_anim('air_kick')
-            elif fighter.cur_anim != 'sweep_kick' and fighter.on_ground and fighter.cur_anim != 'sweep_kick':
+            elif fighter.cur_anim != 'sweep_kick' and fighter.on_ground and fighter.cur_anim != 'leg_throw':
                 fighter.set_anim('low_kick')
 
     else:

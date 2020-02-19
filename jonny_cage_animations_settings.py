@@ -40,6 +40,7 @@ johny_cage_move_animations = {'stand': [7, [69, 67, 66, 66, 67, 68, 80], [1] * 1
                               # special move for johny kage
                               'egg_broken': [6, [86, 100, 109, 113, 113, 113], [1] * 6, [], False,
                                              [[1], 'weak_hit', 30, [4, 0]]],
+
                               'air_kick': [2, [50, 50], [3, 3], [], False, [[1], 'heavy_hit', 40, [7, 0]]],
                               'trip': [6, [77, 78, 77, 84, 82, 84], [1] * 6, [], False, False],
                               'stand_up': [5, [36, 49, 52, 78, 61], [1] * 5, [], False, False],

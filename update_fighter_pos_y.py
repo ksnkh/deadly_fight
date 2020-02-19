@@ -10,7 +10,7 @@ def update_y(fighter, f=False):
         dif = [0, (540 - fighter.rect.height) - fighter.actual_coords_y]
         change_position(fighter, dif, 'all')
         fighter.actual_coords_y = 540 - fighter.rect.height
-        if fighter.cur_anim != 'slide':
+        if fighter.cur_anim != 'slide' and fighter.cur_anim != 'leg_throw':
             fighter.vector[0] = 0
         fighter.on_ground = 1
         fighter.vector[1] = 0

@@ -62,6 +62,8 @@ def set_char_anim(char, anim):
             char.vector[0] = 10
         change_position(char, [dif, -200], 'all')
 
+    if anim == 'leg_throw':
+        char.frames += char.frames[::-1]
 
     if char.cur_anim != 'stand':
         if char.previos_moves and char.previos_moves[-1][0] == anim:
