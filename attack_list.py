@@ -56,7 +56,7 @@ class AttackExecution(pygame.sprite.Sprite):
             for i in attack_Liu_Kang:
                 self.points.append([30, y, (str(i) + ': ' + str(attack_Liu_Kang[i])), (128, 128, 128)])
                 y += 40
-        elif hero_attack == 'Johnny Cage':
+        elif hero_attack == 'Johny Cage':
             y = 30
             for i in attack_Johnny_Cage:
                 self.points.append([30, y, (str(i) + ': ' + str(attack_Johnny_Cage[i])), (128, 128, 128)])

@@ -88,10 +88,10 @@ keyboard = {'113': 'Q',
             '8': 'BACKSPACE',
             '13': 'ENTER',
             '303': 'SHIFT_R',
-            '273': 'ARROW_UP',
-            '274': 'ARROW_DN',
-            '275': 'ARROW_R',
-            '276': 'ARROW_L'}
+            '273': 'UP',
+            '274': 'DOWN',
+            '275': 'RIGHT',
+            '276': 'LEFT'}
 
 class Settings:
     def __init__(self, music_class, sound_class):

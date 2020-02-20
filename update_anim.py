@@ -21,7 +21,7 @@ def update_anim(fighter):
                         fighter.set_anim('teleport')
                 if fighter.previos_moves[-1][0] == 'walk_f' and fighter.cur_anim != 'throw' and fighter.cur_anim != 'teleport':
                     fighter.set_anim('throw')
-            elif fighter.cur_anim != 'throw':
+            if fighter.cur_anim != 'throw':
                 fighter.set_anim('low_punch')
 
         if fighter.attack == 'high_kick' and fighter.cur_anim != 'high_kick' and fighter.on_ground:
@@ -34,7 +34,9 @@ def update_anim(fighter):
                     fighter.set_anim('roundhouse')
                 if fighter.previos_moves[-1][0] == 'sweep_kick' and fighter.cur_anim != 'slide' and fighter.name == 'Sub-Zero':
                     fighter.set_anim('slide')
-            elif fighter.cur_anim != 'roundhouse':
+            if fighter.ducked and fighter.name == 'Johny Cage' and fighter.cur_anim != 'ball_cracker':
+                fighter.set_anim('ball_cracker')
+            if fighter.cur_anim != 'roundhouse' and fighter.cur_anim != 'super_kick' and fighter.cur_anim != 'slide' and fighter.cur_anim != 'ball_cracker' and fighter.cur_anim != 'high_kick':
                 fighter.set_anim('high_kick')
 
         if fighter.attack == 'low_kick' and fighter.cur_anim != 'low_kick':

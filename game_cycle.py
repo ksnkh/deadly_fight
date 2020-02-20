@@ -5,6 +5,7 @@ from update_character_img import update_img
 from update_combo_list import update_combo_list
 from collision import collision
 import pickle
+from other.keybord_dict import keyboard
 
 pygame.init()
 pygame.mixer.init()
@@ -19,12 +20,13 @@ clock = pygame.time.Clock()
 
 
 def game_cycle(fight_settings):
+    control = open("other\control.txt", "r")
+    key_bind = control.read().split('\n')
+
     img_change = 0
     show_attack_list = False
     endgame = False
     endgame_timer = 0
-    debug = 0
-    msg_num = 0
     while fight_settings.running:
         for event in pygame.event.get():
             if event.type == fall:
@@ -46,35 +48,35 @@ def game_cycle(fight_settings):
                     else:
                         show_attack_list = True
 
-                if event.key == pygame.K_y:
+                if event.key == keyboard[key_bind[4]]:
+                    print(event.key)
                     fight_settings.char.attack = 'low_punch'
-                elif event.key == pygame.K_u:
+                elif event.key == keyboard[key_bind[5]]:
                     fight_settings.char.attack = 'high_punch'
-                elif event.key == pygame.K_i:
+                elif event.key == keyboard[key_bind[6]]:
                     fight_settings.char.attack = 'low_kick'
-                elif event.key == pygame.K_o:
+                elif event.key == keyboard[key_bind[7]]:
                     fight_settings.char.attack = 'high_kick'
                 elif fight_settings.char.cur_anim not in fight_settings.char.attack_animations:
                     fight_settings.char.attack = False
 
         # key press processing
         if not fight_settings.char.dead:
-            if pygame.key.get_pressed()[pygame.K_a]:
+            if pygame.key.get_pressed()[keyboard[key_bind[2]]]:
                 move(fight_settings.char, -1)
 
-            if pygame.key.get_pressed()[pygame.K_d]:
+            if pygame.key.get_pressed()[keyboard[key_bind[3]]]:
                 move(fight_settings.char, 1)
 
-            if pygame.key.get_pressed()[pygame.K_w]:
+            if pygame.key.get_pressed()[keyboard[key_bind[0]]]:
                 jump(fight_settings.char)
 
-            if pygame.key.get_pressed()[pygame.K_s] and fight_settings.char.on_ground and not fight_settings.char.block:
+            if pygame.key.get_pressed()[keyboard[key_bind[1]]] and fight_settings.char.on_ground and not fight_settings.char.block:
                 fight_settings.char.ducked = True
             else:
                 fight_settings.char.ducked = False
 
-            if pygame.key.get_pressed()[
-                pygame.K_SPACE] and fight_settings.char.on_ground and not fight_settings.char.ducked:
+            if pygame.key.get_pressed()[keyboard[key_bind[8]]] and fight_settings.char.on_ground and not fight_settings.char.ducked:
                 fight_settings.char.block = True
             else:
                 fight_settings.char.block = False

@@ -28,8 +28,11 @@ def update_img(char, enemy, side, cf, f=False):
 
         else:
             char.cur_frame += 1
+        try:
+            char.frame_time = char.curent_animation_settings[2][char.cur_frame]
+        except IndexError:
+            print(char.curent_animation_settings[2], char.cur_frame)
 
-        char.frame_time = char.curent_animation_settings[2][char.cur_frame]
     char.image = char.frames[char.cur_frame]
 
     if char.side == 'right':

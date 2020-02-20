@@ -1,7 +1,7 @@
-W
-S
-A
-D
+UP
+DOWN
+LEFT
+RIGHT
 Y
 U
 I
