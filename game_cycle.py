@@ -101,7 +101,6 @@ def game_cycle(fight_settings):
                 msg.append(effect)
         try:
             fight_settings.client_socket.send(pickle.dumps(msg))
-            print(fight_settings.char.actual_coords_x, fight_settings.char.pos_x, fight_settings.enemy.actual_coords_x, fight_settings.enemy.pos_x, fight_settings.cf.pos_x)
 
         except ConnectionResetError:
             break

@@ -65,6 +65,12 @@ def set_char_anim(char, anim):
     if anim == 'leg_throw':
         char.frames += char.frames[::-1]
 
+    if anim == 'super_kick':
+        if char.side == 'left':
+            char.vector[0] = 10
+        else:
+            char.vector[0] = -10
+
     if char.cur_anim != 'stand':
         if char.previos_moves and char.previos_moves[-1][0] == anim:
             char.previos_moves[-1][1] = 0

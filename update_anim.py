@@ -26,6 +26,10 @@ def update_anim(fighter):
 
         if fighter.attack == 'high_kick' and fighter.cur_anim != 'high_kick' and fighter.on_ground:
             if fighter.previos_moves:
+                if len(fighter.previos_moves) >= 2:
+                    if fighter.previos_moves[-2][0] == 'duck' and fighter.previos_moves[-1][0] == 'walk_f' \
+                            and fighter.cur_anim != 'super_kick' and fighter.name == 'Liu Kang':
+                        fighter.set_anim('super_kick')
                 if fighter.previos_moves[-1][0] == 'walk_b' and fighter.cur_anim != 'roundhouse':
                     fighter.set_anim('roundhouse')
                 if fighter.previos_moves[-1][0] == 'sweep_kick' and fighter.cur_anim != 'slide' and fighter.name == 'Sub-Zero':
