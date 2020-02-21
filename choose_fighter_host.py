@@ -178,9 +178,11 @@ class ChooseFighterH:
 
         os.startfile('start server.bat')
 
-        HOST = "192.168.1.153"  # input('Enter host: ')
+        import socket
+        hostname = socket.gethostname()
+        HOST = socket.gethostbyname(hostname)
         PORT = 33000  # input('Enter port: ')
-        self.client_socket = socket(AF_INET, SOCK_STREAM)
+        self.client_socket = socket.socket(AF_INET, SOCK_STREAM)
         self.client_socket.connect((HOST, PORT))
         self.receive_thread = Thread(target=receive, args=(self, ))
         self.receive_thread.start()

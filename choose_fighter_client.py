@@ -139,7 +139,7 @@ class ChooseFighterC:
                 except OSError:  # Possibly client has left the chat.
                     break
 
-        HOST = '192.168.1.153' #self.ip
+        HOST = self.ip
         PORT = 33000  # input('Enter port: ')
         self.client_socket = socket(AF_INET, SOCK_STREAM)
         try:

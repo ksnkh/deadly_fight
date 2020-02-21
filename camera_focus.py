@@ -7,6 +7,7 @@ class CameraFocus(pygame.sprite.Sprite):
         image = pygame.Surface([5, 5])
         image.fill(pygame.Color("#ff0000"))
         self.image = image
+        self.image.set_alpha(0)
         self.rect = self.image.get_rect()
         self.rect.topleft = (400, 450)
         self.pos_x = 850
