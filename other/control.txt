@@ -1,0 +1,9 @@
+UP
+DOWN
+LEFT
+RIGHT
+Y
+U
+I
+O
+SPACE
